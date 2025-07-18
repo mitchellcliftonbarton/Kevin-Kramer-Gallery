@@ -2,11 +2,10 @@
 	import { PortableText } from '@portabletext/svelte';
 	import ExhibitionItemLarge from '$lib/components/ExhibitionItemLarge.svelte';
 	import ExhibitionItemSmall from '$lib/components/ExhibitionItemSmall.svelte';
+	import PressItem from '$lib/components/PressItem.svelte';
 
 	// define props
 	let { data } = $props();
-
-	console.log(data);
 
 	// destructure data
 	const { homeData, siteSettings } = data;
@@ -19,6 +18,9 @@
 
 	// // destructure exhibitions
 	const { currentExhibitions, upcomingExhibitions, pastExhibitions, latestPress } = homeData;
+
+	// setup press to show
+	let pressToShow = $derived(featured_press || latestPress);
 </script>
 
 <div class="home pt-xxl">
@@ -40,34 +42,19 @@
 		</section>
 	{/if}
 
-	<section class="press px-lg">
-		<div class="mx-auto w-full lg:w-1/2">
-			<h2 class="text-center">Recent Press</h2>
+	{#if pressToShow.length > 0}
+		<section class="press px-lg">
+			<div class="max-w-def-max mx-auto">
+				<h2 class="text-center">Recent Press</h2>
 
-			<div class="press-items mt-line-break">
-				<div>
-					<p>
-						“Kayode Ojo Wants You to Question Your Relationship to Fashion”<br />Kat Herriman<br
-						/><span class="italic">W Magazine</span><br />November 2023
-					</p>
-				</div>
-
-				<div>
-					<p>
-						“Kayode Ojo Wants You to Question Your Relationship to Fashion”<br />Kat Herriman<br
-						/><span class="italic">W Magazine</span><br />November 2023
-					</p>
-				</div>
-
-				<div>
-					<p>
-						“Kayode Ojo Wants You to Question Your Relationship to Fashion”<br />Kat Herriman<br
-						/><span class="italic">W Magazine</span><br />November 2023
-					</p>
+				<div class="press-items mt-line-break">
+					{#each pressToShow as press}
+						<PressItem {press} />
+					{/each}
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	{/if}
 
 	<section class="past-exhibitions px-base">
 		<div class="title px-base flex">
@@ -107,7 +94,7 @@
 
 	.press {
 		.press-items {
-			& > * + * {
+			:global(& > * + *) {
 				margin-top: var(--spacing-line-break);
 			}
 		}

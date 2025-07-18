@@ -7,7 +7,7 @@
 
 <div class="px-lg pb-lg pt-xxl">
 	{#if data?.text}
-		<div class="rich-text mx-auto w-full max-w-[800px] lg:w-1/2">
+		<div class="rich-text max-w-def-max mx-auto w-full lg:w-1/2">
 			<PortableText value={data.text} />
 		</div>
 	{/if}

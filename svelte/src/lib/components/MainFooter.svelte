@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { PortableText } from '@portabletext/svelte';
 	import { replaceNewlinesInSpans } from '$lib/utils';
+	import { globalState } from '$lib/state/state.svelte';
 
 	const { siteSettings } = page?.data;
 
@@ -11,6 +12,11 @@
 	// replace newlines in spans
 	let addressNoBreaks = replaceNewlinesInSpans(address);
 	let hoursNoBreaks = replaceNewlinesInSpans(hours);
+
+	const openNewsletterPopup = () => {
+		document.body.style.overflow = 'hidden';
+		globalState.newsletterPopupActive = true;
+	};
 </script>
 
 <footer class="px-lg pb-lg gap-base mt-xxxl grid grid-cols-12">
@@ -37,7 +43,7 @@
 	</div>
 
 	<div class="text-blue col-span-3 flex flex-col items-start">
-		<button>Mailing List</button>
+		<button onclick={openNewsletterPopup}>Mailing List</button>
 		{#each socialLinks as link}
 			<a href={link.href} target={link.blank ? '_blank' : '_self'}>{link.linkText}</a>
 		{/each}

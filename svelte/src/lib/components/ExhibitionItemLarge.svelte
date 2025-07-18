@@ -7,7 +7,7 @@
 	let { exhibition, typeTitle = 'Exhibition' } = $props();
 
 	// destructure exhibition
-	const { alternate_location, start_date, end_date, artists, featured_image } = exhibition;
+	const { alternate_location, start_date, end_date, artists, featured_image, title } = exhibition;
 
 	const formattedDate = formatDate({
 		startDate: start_date,
@@ -34,7 +34,7 @@
 				<p>{formattedArtistList}</p>
 			{/if}
 
-			<p class="italic">{exhibition.title}</p>
+			<p class="italic">{title}</p>
 
 			{#if formattedDate}
 				<p>{formattedDate}</p>
@@ -46,7 +46,7 @@
 		<figure class="bg-grey-1 mt-base aspect-[4/3] overflow-hidden">
 			<img
 				data-src={featured_image.asset.url}
-				alt={exhibition.title}
+				alt={title}
 				class="lazyload h-full w-full object-cover object-center"
 			/>
 		</figure>

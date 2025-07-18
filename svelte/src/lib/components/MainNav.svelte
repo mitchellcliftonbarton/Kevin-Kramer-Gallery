@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/state';
+	import ExhibitionTitleInfo from './ExhibitionTitleInfo.svelte';
 
 	// get current path
 	let currentPath = $derived(page.url.pathname);
@@ -65,9 +66,9 @@
 
 			<a href="/information" class="lg:hover:text-blue">Close</a>
 		{:else if isExhibitionDetailPage}
-			<a href="/">{page?.data?.exhibition?.title}</a>
+			<ExhibitionTitleInfo />
 
-			<a href="?view=images" class="lg:hover:text-blue">Images</a>
+			<a href="?view=images" class="lg:hover:text-blue">Images (12)</a>
 		{:else}
 			<div class="flex-1"></div>
 
@@ -76,7 +77,7 @@
 					href={mainLinkUrl}
 					onmouseenter={handleMainLinkEnter}
 					onmouseleave={handleMainLinkLeave}
-					class="text-blue"
+					class="text-blue w-[200px] text-center"
 				>
 					{mainLinkText}
 				</a>

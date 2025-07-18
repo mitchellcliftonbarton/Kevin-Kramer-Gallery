@@ -13,7 +13,7 @@
 
 <div class="flex min-h-[100svh] flex-col">
 	<div class="px-lg flex flex-1 items-center justify-center">
-		<div class="gap-base grid w-full max-w-[800px] grid-cols-2 lg:w-1/2">
+		<div class="gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">
 			{#if alert}
 				<div class="alert text-green rich-text col-span-2">
 					<PortableText value={alert} />
