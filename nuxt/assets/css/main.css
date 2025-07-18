@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Stempel Garamond';
+  src: url('/fonts/StempelGaramondLTStd-Roman.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Stempel Garamond';
+  src: url('/fonts/StempelGaramondLTStd-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@theme {
+  --text-sm: 1.2rem;
+  --text-sm--line-height: 1.25;
+  --text-base: 1.8rem;
+  --text-base--line-height: 1.25;
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --font-primary: 'Stempel Garamond', serif;
+}
+
+html {
+  font-size: 10px;
+  color: var(--color-black);
+  background: var(--color-white);
+}
+
+body {
+  font-size: var(--text-base);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.3;
+}
