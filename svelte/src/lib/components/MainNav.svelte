@@ -67,8 +67,6 @@
 			<a href="/information" class="lg:hover:text-blue">Close</a>
 		{:else if isExhibitionDetailPage}
 			<ExhibitionTitleInfo />
-
-			<a href="?view=images" class="lg:hover:text-blue">Images (12)</a>
 		{:else}
 			<div class="flex-1"></div>
 

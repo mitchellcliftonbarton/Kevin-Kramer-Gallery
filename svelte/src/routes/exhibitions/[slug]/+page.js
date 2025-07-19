@@ -12,7 +12,10 @@ export const load = async ({ params }) => {
 		start_date,
 		end_date,
 		press[]->,
-		exhibition_text
+		exhibition_text,
+		alternate_location,
+		exhibition_text_caption_override,
+		additional_text_sections[]
 	}`);
 
 	return {
