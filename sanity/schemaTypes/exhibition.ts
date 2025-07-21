@@ -57,6 +57,12 @@ export default {
       of: [{type: 'reference', to: [{type: 'artist'}]}],
     },
     {
+      title: 'Is Solo',
+      name: 'is_solo',
+      type: 'boolean',
+      description: 'If true, the exhibition is a solo show.',
+    },
+    {
       title: 'Artists List Override',
       name: 'artists_list_override',
       type: 'text',
@@ -79,12 +85,16 @@ export default {
               title: 'Media',
               description: 'The media to display.',
               of: [...Image, ...Video],
+              options: {
+                layout: 'grid',
+              },
             },
             {
-              type: 'string',
+              type: 'array',
               name: 'caption',
               title: 'Caption',
               description: 'A caption for the media.',
+              of: RichText,
             },
             {
               type: 'array',
@@ -92,13 +102,17 @@ export default {
               title: 'Artists',
               description: 'A list of artists associated with this media.',
               of: [{type: 'reference', to: [{type: 'artist'}]}],
+              options: {
+                layout: 'list',
+              },
+              hidden: ({document}: {document: {is_solo?: boolean}}) => document.is_solo,
             },
           ],
         },
       ],
-      options: {
-        layout: 'grid',
-      },
+      // options: {
+      //   layout: 'grid',
+      // },
     },
     {
       name: 'exhibition_text',

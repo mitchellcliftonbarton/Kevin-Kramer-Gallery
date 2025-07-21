@@ -80,3 +80,16 @@ export function formatArtistList(artists) {
 	// if there are 3-5 artists, return comma-separated list
 	return artists.map((artist) => artist.name).join(', ');
 }
+
+// flatten exhibition media
+export function flattenExhibitionMedia(media) {
+	return media.flatMap((mediaGroup, groupIndex) =>
+		mediaGroup.media.map((media, mediaIndex) => ({
+			...media,
+			groupIndex,
+			mediaIndex,
+			mediaGroup,
+			caption: mediaGroup.caption
+		}))
+	);
+}

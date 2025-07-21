@@ -1,12 +1,12 @@
 <script>
 	import { page } from '$app/state';
-	import { formatDate, formatArtistList } from '$lib/utils';
+	import { formatDate, formatArtistList, flattenExhibitionMedia } from '$lib/utils';
 
 	// destructure page data
 	const { exhibition } = page?.data;
 
 	// destructure exhibition
-	const { title, start_date, end_date, artists } = exhibition;
+	const { title, start_date, end_date, artists, exhibition_media } = exhibition;
 
 	// check if 'view' is in search params
 	const isImagesView = $derived(page.url.searchParams.get('view') === 'images');
@@ -24,6 +24,11 @@
 	const formattedArtistList = formatArtistList(artists);
 
 	let linkText = $state(null);
+
+	// get total number of images
+	const totalImages = $derived(
+		exhibition_media ? flattenExhibitionMedia(exhibition_media).length : 0
+	);
 
 	$effect(() => {
 		const parts = [];
@@ -49,7 +54,11 @@
 </div>
 
 {#if !isImagesView}
-	<a href={`${page.url.pathname}?view=images&layout=scroll`} class="text-blue">Images (12)</a>
+	{#if totalImages > 0}
+		<a href={`${page.url.pathname}?view=images&layout=scroll`} class="text-blue"
+			>Images ({totalImages})</a
+		>
+	{/if}
 {:else}
 	<div class="flex w-1/3 flex-none items-center justify-between">
 		<div>

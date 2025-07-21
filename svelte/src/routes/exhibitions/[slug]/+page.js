@@ -15,7 +15,33 @@ export const load = async ({ params }) => {
 		exhibition_text,
 		alternate_location,
 		exhibition_text_caption_override,
-		additional_text_sections[]
+		additional_text_sections[],
+		exhibition_media[]{
+			media[]{
+				_type,
+				alt,
+				asset->{
+					...,
+					metadata
+				},
+				file{
+					asset->{
+						...,
+						metadata
+					}
+				},
+				video_type,
+				vimeo_url,
+				poster{
+					asset->{
+						...,
+						metadata
+					},
+					alt
+				}
+			},
+			caption[]
+		}
 	}`);
 
 	return {

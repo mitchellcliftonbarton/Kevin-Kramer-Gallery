@@ -89,3 +89,9 @@
 		{/if}
 	</nav>
 </header>
+
+<style>
+	header {
+		z-index: 2000;
+	}
+</style>
