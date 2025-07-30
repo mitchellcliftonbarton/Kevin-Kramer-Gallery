@@ -3,6 +3,7 @@
 	"account_id": "d2aff00ac45b914731391712415b1d8c",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-01-01",
+	"compatibility_flags": ["nodejs_compat"],
 	"build": {
 		"command": "npm run build"
 	},
