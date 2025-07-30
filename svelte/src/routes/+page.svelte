@@ -3,6 +3,7 @@
 	import ExhibitionItemLarge from '$lib/components/ExhibitionItemLarge.svelte';
 	import ExhibitionItemSmall from '$lib/components/ExhibitionItemSmall.svelte';
 	import PressItem from '$lib/components/PressItem.svelte';
+	import MainHomeLink from '$lib/components/MainHomeLink.svelte';
 
 	// define props
 	let { data } = $props();
@@ -20,7 +21,13 @@
 	const { currentExhibitions, upcomingExhibitions, pastExhibitions } = homeData;
 </script>
 
-<div class="home pt-xxl">
+<header class="px-lg py-lg-minus">
+	<nav class="flex justify-center">
+		<MainHomeLink />
+	</nav>
+</header>
+
+<div class="home pt-base">
 	{#if alert}
 		<section class="alert text-green rich-text px-lg col-span-2">
 			<Portable value={alert} />

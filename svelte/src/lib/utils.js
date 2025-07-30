@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import Link from './components/Link.svelte';
 import SmallCaps from './components/SmallCaps.svelte';
 
@@ -36,9 +36,10 @@ export function formatDate({ startDate, endDate }) {
 		return false;
 	}
 
-	// Convert to Date objects if they're strings
-	const start = new Date(startDate);
-	const end = new Date(endDate);
+	// Parse dates consistently to avoid SSR/client mismatch
+	// Use parseISO for consistent date parsing across environments
+	const start = parseISO(startDate);
+	const end = parseISO(endDate);
 
 	// check if startDate is before endDate
 	if (start >= end) {
