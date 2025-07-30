@@ -13,6 +13,11 @@
 	const { alert, address, hours, email, contactInformation, socialLinks } = siteSettings;
 </script>
 
+<svelte:head>
+	<title>Information | Kevin Kramer Gallery</title>
+	<meta property="og:title" content="Information | Kevin Kramer Gallery" />
+</svelte:head>
+
 <div class="flex min-h-[100svh] flex-col">
 	<div class="px-lg flex flex-1 items-center justify-center">
 		<div class="gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">

@@ -30,6 +30,7 @@
 
 	// get exhibition data
 	const {
+		title,
 		press,
 		exhibition_text,
 		exhibition_details_override,
@@ -37,7 +38,8 @@
 		start_date,
 		end_date,
 		exhibition_media,
-		alternate_location
+		alternate_location,
+		featured_image
 	} = data?.exhibition;
 
 	// check if exhibition is current
@@ -51,6 +53,14 @@
 		exhibition_media ? flattenExhibitionMedia(exhibition_media) : []
 	);
 </script>
+
+<svelte:head>
+	<title>{title} | Kevin Kramer Gallery</title>
+	<meta property="og:title" content="{title} | Kevin Kramer Gallery" />
+	{#if featured_image?.asset?.url}
+		<meta property="og:image" content={featured_image.asset.url} />
+	{/if}
+</svelte:head>
 
 <div class="exhibition-content">
 	{#if isImagesView && !isScrollLayout}

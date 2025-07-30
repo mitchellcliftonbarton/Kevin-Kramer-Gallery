@@ -17,6 +17,7 @@
 
 	// destructure some data
 	const { siteSettings } = data;
+	const { featured_image } = page?.data?.exhibition || {};
 
 	// Vars
 	let loadingTimeout;
@@ -52,9 +53,13 @@
 </script>
 
 <svelte:head>
-	<meta property="og:title" content={siteSettings.title} />
-	<meta property="og:site_name" content={siteSettings.title} />
+	<meta property="og:site_name" content="Kevin Kramer Gallery" />
 	<meta property="og:locale" content="en_US" />
+	{#if featured_image?.asset?.url}
+		<meta property="og:image" content={featured_image.asset.url} />
+	{:else if siteSettings?.ogImage?.asset?.url}
+		<meta property="og:image" content={siteSettings.ogImage.asset.url} />
+	{/if}
 </svelte:head>
 
 <div id="app" class={`${globalState.newsletterPopupActive ? 'newsletter-popup-active' : ''}`}>

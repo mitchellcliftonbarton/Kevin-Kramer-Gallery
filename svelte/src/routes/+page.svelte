@@ -21,6 +21,11 @@
 	const { currentExhibitions, upcomingExhibitions, pastExhibitions } = homeData;
 </script>
 
+<svelte:head>
+	<title>Kevin Kramer Gallery</title>
+	<meta property="og:title" content="Kevin Kramer Gallery" />
+</svelte:head>
+
 <header class="px-lg py-lg-minus">
 	<nav class="flex justify-center">
 		<MainHomeLink />

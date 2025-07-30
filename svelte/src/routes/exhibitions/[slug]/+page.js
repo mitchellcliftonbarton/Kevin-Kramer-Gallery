@@ -16,6 +16,11 @@ export const load = async ({ params }) => {
 		alternate_location,
 		exhibition_details_override,
 		additional_text_sections[],
+		featured_image{
+			asset->{
+				url
+			}
+		},
 		exhibition_media[]{
 			media[]{
 				_type,
