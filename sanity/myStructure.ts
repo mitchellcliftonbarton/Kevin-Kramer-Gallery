@@ -23,6 +23,7 @@ export const myStructure = (S: any) =>
         .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
       S.documentTypeListItem('exhibition').title('Exhibitions').icon(CalendarIcon),
       S.documentTypeListItem('artist').title('Artists').icon(UserIcon),
+      // S.documentTypeListItem('press').title('Press').icon(AsteriskIcon),
       S.listItem()
         .title('Pages')
         .icon(BillIcon)

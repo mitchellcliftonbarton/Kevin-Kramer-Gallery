@@ -1,5 +1,5 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from '$lib/components/Portable.svelte';
 	import ExhibitionItemLarge from '$lib/components/ExhibitionItemLarge.svelte';
 	import ExhibitionItemSmall from '$lib/components/ExhibitionItemSmall.svelte';
 	import PressItem from '$lib/components/PressItem.svelte';
@@ -17,16 +17,13 @@
 	const { featured_press } = homeData?.homePage;
 
 	// // destructure exhibitions
-	const { currentExhibitions, upcomingExhibitions, pastExhibitions, latestPress } = homeData;
-
-	// setup press to show
-	let pressToShow = $derived(featured_press || latestPress);
+	const { currentExhibitions, upcomingExhibitions, pastExhibitions } = homeData;
 </script>
 
 <div class="home pt-xxl">
 	{#if alert}
 		<section class="alert text-green rich-text px-lg col-span-2">
-			<PortableText value={alert} />
+			<Portable value={alert} />
 		</section>
 	{/if}
 
@@ -42,13 +39,13 @@
 		</section>
 	{/if}
 
-	{#if pressToShow.length > 0}
+	{#if featured_press?.length > 0}
 		<section class="press px-lg">
 			<div class="max-w-def-max mx-auto">
 				<h2 class="text-center">Recent Press</h2>
 
 				<div class="press-items mt-line-break">
-					{#each pressToShow as press}
+					{#each featured_press as press}
 						<PressItem {press} />
 					{/each}
 				</div>

@@ -1,5 +1,5 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from './Portable.svelte';
 	const { section } = $props();
 
 	const { heading, text } = section;
@@ -12,7 +12,7 @@
 
 	{#if text}
 		<div class="rich-text">
-			<PortableText value={text} />
+			<Portable value={text} />
 		</div>
 	{/if}
 </section>

@@ -44,7 +44,9 @@
 	});
 </script>
 
-<header class={`fixed top-0 left-0 w-full ${isExhibitionDetailPage ? 'p-md' : 'p-lg'}`}>
+<header
+	class={`fixed top-0 left-0 w-full ${isExhibitionDetailPage ? 'px-md py-md-minus' : 'px-lg py-lg-minus'}`}
+>
 	<nav class="flex justify-between">
 		{#if isLegalPage}
 			<ul class="flex items-center gap-[0.2em]">

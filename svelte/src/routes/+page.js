@@ -29,8 +29,7 @@ export const load = async () => {
 			},
 			"currentExhibitions": *[_type == "exhibition" && start_date <= now() && end_date >= now()] | order(start_date desc) ${exhibitionProjection},
 			"upcomingExhibitions": *[_type == "exhibition" && start_date > now()] | order(start_date asc) ${exhibitionProjection},
-			"pastExhibitions": *[_type == "exhibition" && end_date < now()] | order(end_date desc) ${exhibitionProjection},
-			"latestPress": *[_type == "press"] | order(date desc)[0...3]
+			"pastExhibitions": *[_type == "exhibition" && end_date < now()] | order(end_date desc) ${exhibitionProjection}
 		}`
 	);
 

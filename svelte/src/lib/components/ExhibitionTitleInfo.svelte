@@ -1,12 +1,13 @@
 <script>
 	import { page } from '$app/state';
 	import { formatDate, formatArtistList, flattenExhibitionMedia } from '$lib/utils';
+	import { toPlainText } from '@portabletext/svelte';
 
 	// destructure page data
 	const { exhibition } = page?.data;
 
 	// destructure exhibition
-	const { title, start_date, end_date, artists, exhibition_media } = exhibition;
+	const { title, start_date, end_date, artists, exhibition_media, alternate_location } = exhibition;
 
 	// check if 'view' is in search params
 	const isImagesView = $derived(page.url.searchParams.get('view') === 'images');
@@ -45,12 +46,16 @@
 			parts.push(formattedDate);
 		}
 
+		if (alternate_location) {
+			parts.push(toPlainText(alternate_location));
+		}
+
 		linkText = parts.join(', ');
 	});
 </script>
 
 <div class="pr-lg flex-1">
-	<a href="/">{@html linkText}</a>
+	<a href="/">{@html linkText} ×</a>
 </div>
 
 {#if !isImagesView}

@@ -1,5 +1,5 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from '$lib/components/Portable.svelte';
 	import PressItem from '$lib/components/PressItem.svelte';
 	import TextSection from '$lib/components/TextSection.svelte';
 	import ImagesScroll from '$lib/components/ImagesScroll.svelte';
@@ -8,8 +8,6 @@
 	import { page } from '$app/state';
 	import { replaceNewlinesInSpans, flattenExhibitionMedia } from '$lib/utils';
 	import { toPlainText } from '@portabletext/svelte';
-
-	console.log(page);
 
 	// props
 	let { data } = $props();
@@ -34,11 +32,12 @@
 	const {
 		press,
 		exhibition_text,
-		exhibition_text_caption_override,
+		exhibition_details_override,
 		additional_text_sections,
 		start_date,
 		end_date,
-		exhibition_media
+		exhibition_media,
+		alternate_location
 	} = data?.exhibition;
 
 	// check if exhibition is current
@@ -65,19 +64,27 @@
 	{:else}
 		<div class="pt-xxl px-lg pb-lg">
 			<div class="max-w-def-max container mx-auto">
-				{#if exhibition_text || isCurrent || exhibition_text_caption_override}
+				{#if exhibition_text || isCurrent || exhibition_details_override}
 					<section class="exhibition-text">
 						<div class="rich-text">
-							<PortableText value={exhibition_text} />
+							<Portable value={exhibition_text} />
 						</div>
 
-						{#if exhibition_text_caption_override}
+						{#if exhibition_details_override}
 							<div class="rich-text text-sm">
-								<PortableText value={exhibition_text_caption_override} />
+								<Portable value={exhibition_details_override} />
 							</div>
 						{:else if isCurrent}
 							<div class="rich-text text-sm">
-								<p>On view at {toPlainText(addressNoBreaks)}<br />{toPlainText(hoursNoBreaks)}</p>
+								{#if alternate_location}
+									<Portable value={alternate_location} />
+								{:else}
+									<p>On view at {toPlainText(addressNoBreaks)}<br />{toPlainText(hoursNoBreaks)}</p>
+								{/if}
+							</div>
+						{:else if alternate_location}
+							<div class="rich-text text-sm">
+								<Portable value={alternate_location} />
 							</div>
 						{/if}
 					</section>

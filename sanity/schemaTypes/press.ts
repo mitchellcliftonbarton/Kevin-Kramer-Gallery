@@ -6,11 +6,17 @@ export default {
   title: 'Press',
   fields: [
     {
-      name: 'title',
+      name: 'article_title',
       type: 'string',
-      title: 'Title',
-      desciption: 'The title of the press item. This is for internal use only.',
-      validation: (Rule: any) => Rule.required(),
+      title: 'Article Title',
+      desciption:
+        'The title of the article. e.g. "Kayode Ojo Wants You to Question Your Relationship to Fashion"',
+    },
+    {
+      title: 'Link',
+      name: 'link',
+      type: 'url',
+      description: 'The link to the press item. Will open in a new tab.',
     },
     {
       name: 'source',
@@ -26,30 +32,17 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: 'article_title',
-      type: 'string',
-      title: 'Article Title',
-      desciption:
-        'The title of the article. e.g. "Kayode Ojo Wants You to Question Your Relationship to Fashion"',
-    },
-    {
       name: 'author',
       type: 'string',
       title: 'Author',
       desciption: 'The author of the article. e.g. "Calvin Tompkins"',
     },
-    {
-      title: 'Text Override',
-      name: 'text_override',
-      type: 'array',
-      description: 'If present, this text will override the text of the press item.',
-      of: RichText,
-    },
-    {
-      title: 'Link',
-      name: 'link',
-      type: 'url',
-      description: 'The link to the press item. Will open in a new tab.',
-    },
+    // {
+    //   title: 'Text Override',
+    //   name: 'text_override',
+    //   type: 'array',
+    //   description: 'If present, this text will override the text of the press item.',
+    //   of: RichText,
+    // },
   ],
 }

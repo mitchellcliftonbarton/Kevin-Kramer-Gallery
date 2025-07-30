@@ -1,5 +1,7 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from '$lib/components/Portable.svelte';
+	import CopyButton from '$lib/components/CopyButton.svelte';
+	import NewsletterForm from '$lib/components/NewsletterForm.svelte';
 
 	// define props
 	let { data } = $props();
@@ -8,7 +10,7 @@
 	const { newsletter_title, siteSettings } = data;
 
 	// destructure site settings
-	const { alert, address, hours, contactInformation, socialLinks } = siteSettings;
+	const { alert, address, hours, email, contactInformation, socialLinks } = siteSettings;
 </script>
 
 <div class="flex min-h-[100svh] flex-col">
@@ -16,21 +18,32 @@
 		<div class="gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">
 			{#if alert}
 				<div class="alert text-green rich-text col-span-2">
-					<PortableText value={alert} />
+					<Portable value={alert} />
 				</div>
 			{/if}
 
 			<div class="info col-span-1">
-				<div class="rich-text">
-					<PortableText value={address} />
-				</div>
+				{#if address}
+					<div class="rich-text">
+						<Portable value={address} />
+					</div>
+				{/if}
+
+				{#if hours}
+					<div class="rich-text">
+						<Portable value={hours} />
+					</div>
+				{/if}
 
 				<div class="rich-text">
-					<PortableText value={hours} />
-				</div>
+					{#if email}
+						<CopyButton textToCopy={email} buttonText="Email" className="lg:hover:text-blue" />
+					{/if}
 
-				<div class="rich-text">
-					<PortableText value={contactInformation} />
+					{#if contactInformation}
+						<Portable value={contactInformation} />
+					{/if}
+
 					{#each socialLinks as link}
 						<a href={link.href} target={link.blank ? '_blank' : '_self'}>{link.linkText}</a>
 					{/each}
@@ -40,23 +53,7 @@
 			<div class="newsletter col-span-1">
 				<h2>{newsletter_title ?? 'Mailing List'}</h2>
 
-				<form class="email-form" action="">
-					<div class="input-wrapper">
-						<input type="text" placeholder="First Name" />
-					</div>
-
-					<div class="input-wrapper">
-						<input type="text" placeholder="Last Name" />
-					</div>
-
-					<div class="input-wrapper">
-						<input type="email" placeholder="Email Address" />
-					</div>
-
-					<div>
-						<button type="submit">Subscribe</button>
-					</div>
-				</form>
+				<NewsletterForm />
 			</div>
 		</div>
 	</div>
@@ -97,45 +94,16 @@
 	}
 
 	.newsletter {
-		& > * + * {
+		:global(& > * + *) {
 			margin-top: var(--spacing-line-break);
 		}
 
-		.email-form {
-			& > * + * {
-				margin-top: var(--spacing-line-break);
-			}
+		:global(.email-form > * + *) {
+			margin-top: var(--spacing-line-break);
+		}
 
-			.input-wrapper {
-				position: relative;
-
-				&::after {
-					content: '';
-					position: absolute;
-					bottom: -0.18em;
-					left: 0;
-					width: 100%;
-					height: 1px;
-					background-color: var(--color-black);
-				}
-
-				input {
-					width: 100%;
-
-					&::placeholder {
-						color: var(--color-black);
-					}
-				}
-			}
-
-			button {
-				opacity: 0.5;
-
-				&:hover {
-					color: var(--color-blue);
-					opacity: 1;
-				}
-			}
+		:global(.email-form .submit-container) {
+			justify-content: flex-start;
 		}
 	}
 </style>

@@ -1,5 +1,6 @@
 <script>
 	import { globalState } from '$lib/state/state.svelte';
+	import NewsletterForm from './NewsletterForm.svelte';
 
 	const closeNewsletterPopup = () => {
 		document.body.style.overflow = 'initial';
@@ -19,26 +20,10 @@
 		<div class="fill-parent"></div>
 	</button>
 
-	<div class="modal bg-green py-lg px-xl">
+	<div class="modal bg-green py-lg px-lg lg:px-xl flex flex-col items-center justify-center">
 		<p class="text-center">Mailing List</p>
 
-		<form class="email-form mt-lg" action="">
-			<div class="input-wrapper">
-				<input type="text" placeholder="First Name" />
-			</div>
-
-			<div class="input-wrapper">
-				<input type="text" placeholder="Last Name" />
-			</div>
-
-			<div class="input-wrapper">
-				<input type="email" placeholder="Email Address" />
-			</div>
-
-			<div class="submit-container flex justify-center">
-				<button type="submit">Subscribe</button>
-			</div>
-		</form>
+		<NewsletterForm />
 	</div>
 </div>
 
@@ -73,51 +58,24 @@
 	}
 
 	.modal {
-		min-width: 500px;
+		min-width: 400px;
 		max-width: 900px;
 		width: 50%;
+		aspect-ratio: 4/3;
 		z-index: 10;
 		position: relative;
 
-		.email-form {
-			& > * + * {
-				margin-top: var(--spacing-md);
-			}
+		:global(.email-form) {
+			margin-top: var(--spacing-lg);
+			width: 100%;
+		}
 
-			& > * + .submit-container {
-				margin-top: 68px;
-			}
+		:global(.email-form > * + *) {
+			margin-top: var(--spacing-md);
+		}
 
-			.input-wrapper {
-				position: relative;
-
-				&::after {
-					content: '';
-					position: absolute;
-					bottom: -0.18em;
-					left: 0;
-					width: 100%;
-					height: 1px;
-					background-color: var(--color-black);
-				}
-
-				input {
-					width: 100%;
-
-					&::placeholder {
-						color: var(--color-black);
-					}
-				}
-			}
-
-			button {
-				opacity: 0.5;
-
-				&:hover {
-					color: var(--color-blue);
-					opacity: 1;
-				}
-			}
+		:global(.email-form > * + .submit-container) {
+			margin-top: 68px;
 		}
 	}
 </style>

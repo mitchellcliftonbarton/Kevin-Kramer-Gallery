@@ -1,7 +1,6 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from './Portable.svelte';
 	import { formatDate, formatArtistList } from '$lib/utils';
-	// import Image from './Image.svelte';
 
 	// define props
 	let { exhibition, typeTitle = 'Exhibition' } = $props();
@@ -17,7 +16,7 @@
 	const formattedArtistList = formatArtistList(artists);
 </script>
 
-<a href={`/exhibitions/${exhibition.slug.current}`} class="block">
+<a href={`/exhibitions/${exhibition.slug.current}`} class="exhibition-item-large block">
 	<div class="titles px-base gap-base grid grid-cols-12">
 		<div class="col-span-6">
 			{#if typeTitle}
@@ -25,7 +24,7 @@
 			{/if}
 
 			{#if alternate_location}
-				<PortableText value={alternate_location} />
+				<Portable value={alternate_location} />
 			{/if}
 		</div>
 
@@ -43,7 +42,7 @@
 	</div>
 
 	{#if featured_image?.asset?.url}
-		<figure class="bg-grey-1 mt-base aspect-[4/3] overflow-hidden">
+		<figure class="bg-grey-1 aspect-[4/3] overflow-hidden">
 			<img
 				data-src={featured_image.asset.url}
 				alt={title}
@@ -57,6 +56,12 @@
 	a {
 		&:hover {
 			color: var(--color-blue);
+		}
+	}
+
+	.exhibition-item-large {
+		& > * + * {
+			margin-top: calc(var(--spacing-base) - 3px);
 		}
 	}
 </style>

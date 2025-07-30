@@ -50,10 +50,16 @@ export default {
       of: RichText,
     },
     {
+      title: 'Email',
+      name: 'email',
+      type: 'string',
+      description: 'The gallery email. This appears on the information page and footer.',
+    },
+    {
       title: 'Contact Information',
       name: 'contactInformation',
       type: 'array',
-      description: 'Information such as email, phone number, etc.',
+      description: 'Phone number, etc.',
       of: RichText,
     },
     {

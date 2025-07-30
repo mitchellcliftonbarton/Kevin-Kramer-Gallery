@@ -1,5 +1,5 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from './Portable.svelte';
 
 	// props
 	let { media } = $props();
@@ -55,7 +55,7 @@
 
 	{#if caption}
 		<div class="text-sm">
-			<PortableText value={caption} />
+			<Portable value={caption} />
 		</div>
 	{/if}
 </div>

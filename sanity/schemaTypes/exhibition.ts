@@ -57,17 +57,17 @@ export default {
       of: [{type: 'reference', to: [{type: 'artist'}]}],
     },
     {
-      title: 'Is Solo',
-      name: 'is_solo',
-      type: 'boolean',
-      description: 'If true, the exhibition is a solo show.',
-    },
-    {
       title: 'Artists List Override',
       name: 'artists_list_override',
       type: 'text',
       description:
         'By default, the artists list will be displayed as a comma-separated list of artist names (unless there are more than 5 artists, in which case it will say "Group Show"). If present, this field will override it.',
+    },
+    {
+      title: 'Solo Show',
+      name: 'is_solo',
+      type: 'boolean',
+      description: 'If true, the exhibition is a solo show.',
     },
     {
       title: 'Exhibition Media',
@@ -122,8 +122,8 @@ export default {
       of: RichText,
     },
     {
-      name: 'exhibition_text_caption_override',
-      title: 'Exhibition Text Caption Override',
+      name: 'exhibition_details_override',
+      title: 'Exhibition Details Override',
       type: 'array',
       description:
         'By default, the gallery address and hours will appear under the exhibition text. If present, this field will override it.',

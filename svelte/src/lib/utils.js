@@ -1,4 +1,14 @@
 import { format } from 'date-fns';
+import Link from './components/Link.svelte';
+import SmallCaps from './components/SmallCaps.svelte';
+
+// setup components for portable text
+export const components = {
+	marks: {
+		link: Link,
+		smallcaps: SmallCaps
+	}
+};
 
 export function replaceNewlinesInSpans(blocks) {
 	return blocks.map((block) => {

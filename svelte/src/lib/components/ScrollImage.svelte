@@ -1,5 +1,5 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from './Portable.svelte';
 
 	// props
 	let { media } = $props();
@@ -55,7 +55,7 @@
 		<div class="px-sm mt-sm flex items-start gap-4 text-sm">
 			<p>{indexText}</p>
 
-			<PortableText value={caption} />
+			<Portable value={caption} />
 		</div>
 	{/if}
 </div>

@@ -1,3 +1,5 @@
+import {SmallCapsIcon, SmallCapsDecorator} from './fieldObjects'
+
 export const Link = {
   type: 'object',
   name: 'Link',
@@ -7,7 +9,7 @@ export const Link = {
       name: 'linkText',
       type: 'string',
       title: 'Link Text',
-      validation: (Rule: any) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'href',
@@ -31,7 +33,18 @@ export const Link = {
 export const RichText = [
   {
     type: 'block',
+    styles: [],
     marks: {
+      decorators: [
+        {
+          title: 'Small Caps',
+          value: 'smallcaps',
+          icon: SmallCapsIcon,
+          component: SmallCapsDecorator,
+        },
+        {title: 'Strong', value: 'strong'},
+        {title: 'Emphasis', value: 'em'},
+      ],
       annotations: [
         {
           name: 'link',
@@ -94,13 +107,13 @@ export const Video = [
         options: {
           accept: 'video/mp4',
         },
-        hidden: ({parent}: {parent: {video_type?: string}}) => parent.video_type !== 'mp4',
+        hidden: ({parent}) => parent.video_type !== 'mp4',
       },
       {
         name: 'vimeo_url',
         type: 'url',
         title: 'Vimeo URL',
-        hidden: ({parent}: {parent: {video_type?: string}}) => parent.video_type !== 'vimeo',
+        hidden: ({parent}) => parent.video_type !== 'vimeo',
       },
       {
         name: 'poster',

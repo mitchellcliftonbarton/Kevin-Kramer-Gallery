@@ -14,7 +14,7 @@ export const load = async ({ params }) => {
 		press[]->,
 		exhibition_text,
 		alternate_location,
-		exhibition_text_caption_override,
+		exhibition_details_override,
 		additional_text_sections[],
 		exhibition_media[]{
 			media[]{
