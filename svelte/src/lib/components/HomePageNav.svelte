@@ -40,7 +40,7 @@
 
 <header
 	bind:this={headerElement}
-	class="px-lg py-lg-minus fixed top-0 left-0 w-full"
+	class="px-sm-mid lg:px-lg py-base-mid lg:py-lg-minus fixed top-0 left-0 w-full"
 	class:visible={isVisible}
 >
 	<nav class="flex justify-center">

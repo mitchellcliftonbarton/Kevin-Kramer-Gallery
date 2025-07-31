@@ -4,6 +4,7 @@
 	import ExhibitionItemSmall from '$lib/components/ExhibitionItemSmall.svelte';
 	import PressItem from '$lib/components/PressItem.svelte';
 	import MainHomeLink from '$lib/components/MainHomeLink.svelte';
+	import PastExhibitions from '$lib/components/PastExhibitions.svelte';
 
 	// define props
 	let { data } = $props();
@@ -26,21 +27,21 @@
 	<meta property="og:title" content="Kevin Kramer Gallery" />
 </svelte:head>
 
-<header class="px-lg py-lg-minus">
+<header class="px-sm-mid lg:px-lg py-base-mid lg:py-lg-minus">
 	<nav class="flex justify-center">
 		<MainHomeLink />
 	</nav>
 </header>
 
-<div class="home pt-base">
+<div class="home pt-lg lg:pt-base">
 	{#if alert}
-		<section class="alert text-green rich-text px-lg col-span-2">
+		<section class="alert text-green rich-text px-sm-mid lg:px-lg col-span-2">
 			<Portable value={alert} />
 		</section>
 	{/if}
 
 	{#if currentExhibitions.length > 0 || upcomingExhibitions.length > 0}
-		<section class="current-upcoming-exhibitions px-base">
+		<section class="current-upcoming-exhibitions px-sm-mid lg:px-base">
 			{#each currentExhibitions as exhibition}
 				<ExhibitionItemLarge {exhibition} typeTitle="On View" />
 			{/each}
@@ -52,7 +53,7 @@
 	{/if}
 
 	{#if featured_press?.length > 0}
-		<section class="press px-lg">
+		<section class="press px-base-mid lg:px-lg">
 			<div class="max-w-def-max mx-auto">
 				<h2 class="text-center">Recent Press</h2>
 
@@ -65,40 +66,26 @@
 		</section>
 	{/if}
 
-	<section class="past-exhibitions px-base">
-		<div class="title px-base flex">
-			<div class="flex-1"></div>
-			<div class="flex flex-1 justify-center">
-				<h2>Past Exhibitions</h2>
-			</div>
-
-			<div class="flex flex-1 justify-end gap-[.2em]">
-				<div>
-					<button>Images</button><span>,</span>
-				</div>
-				<div>
-					<button>List</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="past-exhibitions-list gap-base mt-line-break grid grid-cols-2">
-			{#each pastExhibitions as exhibition}
-				<ExhibitionItemSmall {exhibition} />
-			{/each}
-		</div>
-	</section>
+	<PastExhibitions {pastExhibitions} />
 </div>
 
 <style>
 	.home {
-		& > * + * {
-			margin-top: var(--spacing-xl);
+		:global(& > section + section) {
+			margin-top: var(--spacing-xl-minus);
+
+			@media (min-width: 1024px) {
+				margin-top: var(--spacing-xl);
+			}
 		}
 	}
 
 	.current-upcoming-exhibitions :global(> * + *) {
-		margin-top: var(--spacing-lg);
+		margin-top: var(--spacing-lg-mid);
+
+		@media (min-width: 1024px) {
+			margin-top: var(--spacing-lg);
+		}
 	}
 
 	.press {

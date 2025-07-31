@@ -19,15 +19,21 @@
 </svelte:head>
 
 <div class="flex min-h-[100svh] flex-col">
-	<div class="px-lg flex flex-1 items-center justify-center">
-		<div class="gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">
+	<div class="px-base-mid lg:px-lg flex flex-1 items-center justify-center">
+		<div class="gap-lg lg:gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">
 			{#if alert}
-				<div class="alert text-green rich-text col-span-2">
+				<div class="alert text-green rich-text col-span-2 hidden lg:block">
 					<Portable value={alert} />
 				</div>
 			{/if}
 
-			<div class="info col-span-1">
+			<div class="info col-span-2 lg:col-span-1">
+				{#if alert}
+					<div class="alert text-green rich-text lg:hidden">
+						<Portable value={alert} />
+					</div>
+				{/if}
+
 				{#if address}
 					<div class="rich-text">
 						<Portable value={address} />
@@ -55,7 +61,7 @@
 				</div>
 			</div>
 
-			<div class="newsletter col-span-1">
+			<div class="newsletter col-span-2 lg:col-span-1">
 				<h2>{newsletter_title ?? 'Mailing List'}</h2>
 
 				<NewsletterForm />
@@ -63,9 +69,9 @@
 		</div>
 	</div>
 
-	<div class="other-links p-lg flex justify-start gap-5 text-sm">
-		<nav>
-			<ul class="flex items-center gap-[0.2em]">
+	<div class="other-links p-base-mid lg:p-lg flex justify-start gap-5 text-sm">
+		<nav class="flex-1 lg:flex-none">
+			<ul class="flex flex-col items-start lg:flex-row lg:items-center lg:gap-[0.2em]">
 				<li>
 					<a href="/accessibility">Accessibility</a><span>,</span>
 				</li>
@@ -78,8 +84,19 @@
 			</ul>
 		</nav>
 
-		<p>Site Design: <a href="https://www.noahbeckwith.com/" target="_blank">Noah Beckwith</a></p>
-		<p>Site Build: <a href="https://www.cold-rice.info/" target="_blank">Cold Rice LLC</a></p>
+		<div class="flex flex-1 flex-col items-start lg:flex-none lg:flex-row lg:items-center lg:gap-5">
+			<p>
+				Site Design: <br class="lg:hidden" /><a href="https://www.noahbeckwith.com/" target="_blank"
+					>Noah Beckwith</a
+				>
+			</p>
+			<br class="lg:hidden" />
+			<p>
+				Site Build: <br class="lg:hidden" /><a href="https://www.cold-rice.info/" target="_blank"
+					>Cold Rice LLC</a
+				>
+			</p>
+		</div>
 	</div>
 </div>
 
@@ -109,6 +126,12 @@
 
 		:global(.email-form .submit-container) {
 			justify-content: flex-start;
+		}
+
+		:global(.email-form .submit-container button[type='submit']:not(:disabled)) {
+			&:hover {
+				color: var(--color-blue);
+			}
 		}
 	}
 </style>

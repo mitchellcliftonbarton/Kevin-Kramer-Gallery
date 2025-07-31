@@ -27,7 +27,7 @@
 		</figure>
 	{/if}
 
-	<div class="titles px-base mt-line-break">
+	<div class="titles pl-sm-mid lg:px-base mt-xs lg:mt-line-break">
 		<div class="col-span-6">
 			{#if formattedArtistList}
 				<p>{formattedArtistList}</p>

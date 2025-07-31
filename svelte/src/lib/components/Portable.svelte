@@ -1,8 +1,8 @@
 <script>
-  import { PortableText } from '@portabletext/svelte';
-  import { components } from '$lib/utils';
+	import { PortableText } from '@portabletext/svelte';
+	import { components } from '$lib/utils';
 
-  const { value } = $props();
+	const { value } = $props();
 </script>
 
-<PortableText value={value} components={components} />
+<PortableText {value} {components} />

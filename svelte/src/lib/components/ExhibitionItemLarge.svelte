@@ -17,18 +17,20 @@
 </script>
 
 <a href={`/exhibitions/${exhibition.slug.current}`} class="exhibition-item-large block">
-	<div class="titles px-base gap-base grid grid-cols-12">
-		<div class="col-span-6">
+	<div class="titles px-sm-mid lg:px-base gap-base-mid lg:gap-base grid grid-cols-12">
+		<div class="col-span-12 lg:col-span-6">
 			{#if typeTitle}
 				<p>{typeTitle}</p>
 			{/if}
 
 			{#if alternate_location}
-				<Portable value={alternate_location} />
+				<div class="hidden lg:block">
+					<Portable value={alternate_location} />
+				</div>
 			{/if}
 		</div>
 
-		<div class="col-span-6">
+		<div class="col-span-12 lg:col-span-6">
 			{#if formattedArtistList}
 				<p>{formattedArtistList}</p>
 			{/if}
@@ -37,6 +39,12 @@
 
 			{#if formattedDate}
 				<p>{formattedDate}</p>
+			{/if}
+
+			{#if alternate_location}
+				<div class="block lg:hidden">
+					<Portable value={alternate_location} />
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -61,7 +69,11 @@
 
 	.exhibition-item-large {
 		& > * + * {
-			margin-top: calc(var(--spacing-base) - 3px);
+			margin-top: var(--spacing-sm-mid);
+
+			@media (min-width: 1024px) {
+				margin-top: calc(var(--spacing-base) - 3px);
+			}
 		}
 	}
 </style>

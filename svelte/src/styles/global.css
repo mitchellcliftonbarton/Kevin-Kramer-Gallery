@@ -17,6 +17,8 @@
 @theme {
 	--text-sm: 1.2rem;
 	--text-sm--line-height: 1.25;
+	--text-sm-plus: 1.5rem;
+	--text-sm-plus--line-height: 1.25;
 	--text-base: 1.8rem;
 	--text-base--line-height: 1.25;
 
@@ -32,12 +34,16 @@
 
 	--spacing-xs: 0.75rem;
 	--spacing-sm: 1.25rem;
+	--spacing-sm-mid: 1.4rem;
 	--spacing-sm-plus: 1.6rem;
 	--spacing-base: 2.5rem;
+	--spacing-base-mid: 2.8rem;
 	--spacing-md-minus: 3rem; /* Just a tiny bit less than md for optics */
 	--spacing-md: 3.2rem;
 	--spacing-lg-minus: 4.4rem; /* Just a tiny bit less than lg for optics */
 	--spacing-lg: 5rem;
+	--spacing-lg-mid: 5.6rem;
+	--spacing-xl-minus: 8.4rem;
 	--spacing-xl: 10rem;
 	--spacing-xxl: 15rem;
 	--spacing-xxxl: 20rem;
@@ -69,13 +75,20 @@ html {
 	color: var(--color-black);
 	background: var(--color-white);
 	font-variant-numeric: oldstyle-nums;
+	overscroll-behavior-y: none;
+	-webkit-font-smoothing: antialiased;
 }
 
 body {
-	font-size: var(--text-base);
+	font-size: var(--text-sm-plus);
 	font-family: var(--font-primary);
 	font-weight: 400;
 	line-height: var(--text-base--line-height);
+	overscroll-behavior-y: none;
+
+	@media (min-width: 1024px) {
+		font-size: var(--text-base);
+	}
 
 	#nprogress .bar {
 		height: 2px;

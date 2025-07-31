@@ -20,7 +20,9 @@
 		<div class="fill-parent"></div>
 	</button>
 
-	<div class="modal bg-green py-lg px-lg lg:px-xl flex flex-col items-center justify-center">
+	<div
+		class="modal bg-yellow lg:bg-green py-lg px-lg lg:px-xl flex flex-col items-center justify-center"
+	>
 		<p class="text-center">Mailing List</p>
 
 		<NewsletterForm />
@@ -60,10 +62,15 @@
 	.modal {
 		min-width: 400px;
 		max-width: 900px;
-		width: 50%;
-		aspect-ratio: 4/3;
+		width: calc(100% - 14px);
+		aspect-ratio: 3/4;
 		z-index: 10;
 		position: relative;
+
+		@media (min-width: 1024px) {
+			aspect-ratio: 4/3;
+			width: 50%;
+		}
 
 		:global(.email-form) {
 			margin-top: var(--spacing-lg);
@@ -76,6 +83,12 @@
 
 		:global(.email-form > * + .submit-container) {
 			margin-top: 68px;
+		}
+
+		:global(.email-form .submit-container button[type='submit']:not(:disabled)) {
+			&:hover {
+				color: var(--color-white);
+			}
 		}
 	}
 </style>

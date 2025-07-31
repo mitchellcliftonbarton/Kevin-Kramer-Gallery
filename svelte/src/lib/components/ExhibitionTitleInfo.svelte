@@ -1,6 +1,11 @@
 <script>
 	import { page } from '$app/state';
-	import { formatDate, formatArtistList, flattenExhibitionMedia } from '$lib/utils';
+	import {
+		formatExhibitionTitle,
+		flattenExhibitionMedia,
+		formatDate,
+		formatArtistList
+	} from '$lib/utils';
 	import { toPlainText } from '@portabletext/svelte';
 
 	// destructure page data
@@ -15,47 +20,49 @@
 	// check if 'layout' is in search params
 	const isScrollLayout = $derived(page.url.searchParams.get('layout') === 'scroll');
 
-	// format date
 	const formattedDate = formatDate({
 		startDate: start_date,
 		endDate: end_date
 	});
 
-	// format artist list
 	const formattedArtistList = formatArtistList(artists);
 
-	let linkText = $state(null);
+	let linkText = $state(formatExhibitionTitle(exhibition));
 
 	// get total number of images
 	const totalImages = $derived(
 		exhibition_media ? flattenExhibitionMedia(exhibition_media).length : 0
 	);
-
-	$effect(() => {
-		const parts = [];
-
-		if (formattedArtistList) {
-			parts.push(formattedArtistList);
-		}
-
-		if (title) {
-			parts.push(`<span class="italic">${title}</span>`);
-		}
-
-		if (formattedDate) {
-			parts.push(formattedDate);
-		}
-
-		if (alternate_location) {
-			parts.push(toPlainText(alternate_location));
-		}
-
-		linkText = parts.join(', ');
-	});
 </script>
 
-<div class="pr-lg flex-1">
-	<a href="/">{@html linkText} ×</a>
+<div class="pr-base lg:pr-lg flex-1">
+	<a href="/" class="hidden lg:block">{@html linkText} ×</a>
+
+	<div class="gap-sm-mid block flex flex-col items-start lg:hidden">
+		<a href="/">
+			{#if formattedArtistList}
+				<p>× {formattedArtistList}</p>
+			{/if}
+
+			<p class="italic">{title}</p>
+
+			{#if formattedDate && alternate_location}
+				<p>{formattedDate}<br />at {toPlainText(alternate_location)}</p>
+			{:else if formattedDate}
+				<p>{formattedDate}</p>
+			{/if}
+		</a>
+
+		<div>
+			<a
+				href={`${page.url.pathname}?view=images&layout=scroll`}
+				class={isScrollLayout ? 'text-blue' : ''}>Scroll</a
+			><span>,&nbsp;</span><a
+				href={`${page.url.pathname}?view=images&layout=overview`}
+				class={!isScrollLayout ? 'text-blue' : ''}>Overview</a
+			>
+		</div>
+	</div>
 </div>
 
 {#if !isImagesView}
@@ -65,8 +72,8 @@
 		>
 	{/if}
 {:else}
-	<div class="flex w-1/3 flex-none items-center justify-between">
-		<div>
+	<div class="flex flex-none items-start justify-between lg:w-1/3 lg:items-center">
+		<div class="hidden lg:block">
 			<a
 				href={`${page.url.pathname}?view=images&layout=scroll`}
 				class={isScrollLayout ? 'text-blue' : ''}>Scroll</a

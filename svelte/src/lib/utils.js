@@ -1,6 +1,7 @@
 import { format, parseISO } from 'date-fns';
 import Link from './components/Link.svelte';
 import SmallCaps from './components/SmallCaps.svelte';
+import { toPlainText } from '@portabletext/svelte';
 
 // setup components for portable text
 export const components = {
@@ -103,4 +104,36 @@ export function flattenExhibitionMedia(media) {
 			caption: mediaGroup.caption
 		}))
 	);
+}
+
+export function formatExhibitionTitle(exhibition) {
+	const { title, start_date, end_date, alternate_location, artists } = exhibition;
+
+	// format date
+	const formattedDate = formatDate({
+		startDate: start_date,
+		endDate: end_date
+	});
+
+	// format artist list
+	const formattedArtistList = formatArtistList(artists);
+
+	const parts = [];
+
+	if (formattedArtistList) {
+		parts.push(formattedArtistList);
+	}
+
+	if (title) {
+		parts.push(`<span class="italic">${title}</span>`);
+	}
+
+	if (alternate_location && formattedDate) {
+		const dateLocationString = `${formattedDate} at ${toPlainText(alternate_location)}`;
+		parts.push(dateLocationString);
+	} else if (formattedDate) {
+		parts.push(formattedDate);
+	}
+
+	return parts.join(', ');
 }

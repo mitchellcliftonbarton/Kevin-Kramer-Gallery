@@ -1,8 +1,9 @@
 <script>
 	import Portable from './Portable.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	// props
-	let { media } = $props();
+	let { media, slideIndex, setCarouselSlide } = $props();
 
 	// console.log(media);
 
@@ -34,7 +35,10 @@
 	);
 </script>
 
-<div class={`media-item ${isLandscape ? 'landscape' : 'portrait'}`}>
+<button
+	class={`media-item w-full ${isLandscape ? 'landscape' : 'portrait'}`}
+	onclick={() => setCarouselSlide(slideIndex)}
+>
 	<figure class="bg-grey-1">
 		{#if _type === 'Image' && asset?.url}
 			<img data-src={asset.url} {alt} class="lazyload h-full w-full object-cover object-center" />
@@ -52,13 +56,13 @@
 	</figure>
 
 	{#if caption}
-		<div class="px-sm mt-sm flex items-start gap-4 text-sm">
+		<div class="px-sm mt-xs lg:mt-sm flex items-start gap-4 text-left text-sm">
 			<p>{indexText}</p>
 
 			<Portable value={caption} />
 		</div>
 	{/if}
-</div>
+</button>
 
 <style>
 	.media-item {
@@ -71,7 +75,11 @@
 		}
 
 		&.portrait {
-			width: 100svh;
+			width: 100%;
+
+			@media (min-width: 1024px) {
+				width: 100svh;
+			}
 
 			figure {
 				aspect-ratio: 3/4;

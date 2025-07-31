@@ -20,8 +20,10 @@
 	};
 </script>
 
-<footer class="px-lg pb-lg gap-base mt-xxxl grid grid-cols-12">
-	<div class="col-span-6">
+<footer
+	class="px-base-mid lg:px-lg pb-base-mid lg:pb-lg gap-base lg:gap-base mt-xxl lg:mt-xxxl grid grid-cols-12"
+>
+	<div class="col-span-12 lg:col-span-6">
 		{#if address}
 			<div class="rich-text text-blue links-fade">
 				<Portable value={addressNoBreaks} />
@@ -35,9 +37,13 @@
 		{/if}
 	</div>
 
-	<div class="col-span-3">
+	<div class="col-span-12 lg:col-span-3">
 		{#if email}
-			<CopyButton textToCopy={email} buttonText="Email" className="text-blue lg:hover:opacity-50 transition-opacity duration-300" />
+			<CopyButton
+				textToCopy={email}
+				buttonText="Email"
+				className="text-blue lg:hover:opacity-50 transition-opacity duration-300"
+			/>
 		{/if}
 
 		{#if contactInformation}
@@ -47,7 +53,7 @@
 		{/if}
 	</div>
 
-	<div class="text-blue col-span-3 flex flex-col items-start">
+	<div class="text-blue col-span-12 flex flex-col items-start lg:col-span-3">
 		<button
 			onclick={openNewsletterPopup}
 			class="transition-opacity duration-300 lg:hover:opacity-50"

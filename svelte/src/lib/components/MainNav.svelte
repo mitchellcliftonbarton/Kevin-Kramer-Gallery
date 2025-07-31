@@ -26,19 +26,19 @@
 	<HomePageNav />
 {:else}
 	<header
-		class={`fixed top-0 left-0 w-full ${isExhibitionDetailPage ? 'px-md py-md-minus' : 'px-lg py-lg-minus'}`}
+		class={`fixed top-0 left-0 w-full ${isExhibitionDetailPage ? 'px-base-mid lg:px-md py-base-mid lg:py-md-minus' : 'px-base-mid lg:px-lg py-base-mid lg:py-lg-minus'}`}
 	>
 		<nav class="flex justify-between">
 			{#if isLegalPage}
-				<ul class="flex items-center gap-[0.2em]">
+				<ul class="flex flex-col items-start gap-[0.2em] lg:flex-row lg:items-center">
 					<li>
 						<a href="/accessibility" class={currentPath === '/accessibility' ? 'text-blue' : ''}
 							>Accessibility</a
-						><span>,</span>
+						><span class="hidden lg:inline">,</span>
 					</li>
 					<li>
 						<a href="/privacy" class={currentPath === '/privacy' ? 'text-blue' : ''}>Privacy</a
-						><span>,</span>
+						><span class="hidden lg:inline">,</span>
 					</li>
 					<li>
 						<a href="/terms" class={currentPath === '/terms' ? 'text-blue' : ''}
