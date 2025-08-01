@@ -27,13 +27,7 @@
 	<meta property="og:title" content="Kevin Kramer Gallery" />
 </svelte:head>
 
-<header class="px-sm-mid lg:px-lg py-base-mid lg:py-lg-minus">
-	<nav class="flex justify-center">
-		<MainHomeLink />
-	</nav>
-</header>
-
-<div class="home pt-lg lg:pt-base">
+<div class="home pt-lg lg:pt-xxl">
 	{#if alert}
 		<section class="alert text-green rich-text px-sm-mid lg:px-lg col-span-2">
 			<Portable value={alert} />

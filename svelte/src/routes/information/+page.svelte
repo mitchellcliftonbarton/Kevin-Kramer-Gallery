@@ -118,10 +118,8 @@
 	}
 
 	.newsletter {
-		:global(& > * + *) {
-			margin-top: var(--spacing-line-break);
-		}
-
+		:global(& > * + *),
+		:global(.email-form .main-fields > * + *),
 		:global(.email-form > * + *) {
 			margin-top: var(--spacing-line-break);
 		}
