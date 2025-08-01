@@ -91,8 +91,12 @@ body {
 	}
 
 	#nprogress .bar {
-		height: 2px;
+		height: 1px;
 		background-color: var(--color-blue);
+
+		@media (min-width: 1024px) {
+			height: 2px;
+		}
 	}
 }
 
@@ -114,8 +118,10 @@ button {
 
 	&:not(.links-fade) {
 		a {
-			&:hover {
-				color: var(--color-blue);
+			@media (min-width: 1024px) {
+				&:hover {
+					color: var(--color-blue);
+				}
 			}
 		}
 	}
@@ -124,8 +130,10 @@ button {
 		a {
 			transition: opacity 0.3s;
 
-			&:hover {
-				opacity: 0.5;
+			@media (min-width: 1024px) {
+				&:hover {
+					opacity: 0.5;
+				}
 			}
 		}
 	}

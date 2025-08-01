@@ -18,7 +18,7 @@
 	<meta property="og:title" content="Information | Kevin Kramer Gallery" />
 </svelte:head>
 
-<div class="flex min-h-[100svh] flex-col">
+<div class="pt-xxl flex min-h-[100svh] flex-col justify-between lg:pt-0">
 	<div class="px-base-mid lg:px-lg flex flex-1 items-center justify-center">
 		<div class="gap-lg lg:gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">
 			{#if alert}
@@ -69,7 +69,7 @@
 		</div>
 	</div>
 
-	<div class="other-links p-base-mid lg:p-lg flex justify-start gap-5 text-sm">
+	<div class="other-links px-base-mid pb-base-mid pt-xl lg:p-lg flex justify-start gap-5 text-sm">
 		<nav class="flex-1 lg:flex-none">
 			<ul class="flex flex-col items-start lg:flex-row lg:items-center lg:gap-[0.2em]">
 				<li>
@@ -103,8 +103,10 @@
 <style>
 	.other-links {
 		a {
-			&:hover {
-				color: var(--color-blue);
+			@media (min-width: 1024px) {
+				&:hover {
+					color: var(--color-blue);
+				}
 			}
 		}
 	}
@@ -129,8 +131,10 @@
 		}
 
 		:global(.email-form .submit-container button[type='submit']:not(:disabled)) {
-			&:hover {
-				color: var(--color-blue);
+			@media (min-width: 1024px) {
+				&:hover {
+					color: var(--color-blue);
+				}
 			}
 		}
 	}

@@ -41,8 +41,10 @@
 	}
 
 	a {
-		&:hover {
-			color: var(--color-blue);
+		@media (min-width: 1024px) {
+			&:hover {
+				color: var(--color-blue);
+			}
 		}
 	}
 </style>

@@ -78,7 +78,7 @@
 		if (emblaEl) {
 			emblaApi = EmblaCarousel(emblaEl, {
 				loop: true,
-				dragThreshold: 10,
+				dragThreshold: 8,
 				duration: 20,
 				startIndex: 0
 				// watchDrag: !isLargeQuery

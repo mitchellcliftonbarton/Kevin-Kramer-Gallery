@@ -23,9 +23,9 @@
 	<div
 		class="modal bg-yellow lg:bg-green py-lg px-lg lg:px-xl flex flex-col items-center justify-center"
 	>
-		<p class="text-center">Mailing List</p>
+		<p class="hidden text-center lg:block">Mailing List</p>
 
-		<NewsletterForm />
+		<NewsletterForm title="Mailing List" />
 	</div>
 </div>
 
@@ -60,9 +60,7 @@
 	}
 
 	.modal {
-		min-width: 400px;
-		max-width: 900px;
-		width: calc(100% - 14px);
+		width: calc(100% - 28px);
 		aspect-ratio: 3/4;
 		z-index: 10;
 		position: relative;
@@ -70,24 +68,39 @@
 		@media (min-width: 1024px) {
 			aspect-ratio: 4/3;
 			width: 50%;
+			min-width: 400px;
+			max-width: 900px;
 		}
 
 		:global(.email-form) {
-			margin-top: var(--spacing-lg);
 			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 100%;
+
+			@media (min-width: 1024px) {
+				margin-top: var(--spacing-lg);
+				height: auto;
+				justify-content: center;
+			}
 		}
 
-		:global(.email-form > * + *) {
+		:global(.email-form .main-fields > * + *) {
 			margin-top: var(--spacing-md);
 		}
 
 		:global(.email-form > * + .submit-container) {
-			margin-top: 68px;
+			@media (min-width: 1024px) {
+				margin-top: 68px;
+			}
 		}
 
 		:global(.email-form .submit-container button[type='submit']:not(:disabled)) {
-			&:hover {
-				color: var(--color-white);
+			@media (min-width: 1024px) {
+				&:hover {
+					color: var(--color-white);
+				}
 			}
 		}
 	}

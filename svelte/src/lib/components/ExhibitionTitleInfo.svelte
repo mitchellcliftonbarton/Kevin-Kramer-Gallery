@@ -35,13 +35,13 @@
 	);
 </script>
 
-<div class="pr-base lg:pr-lg flex-1">
+<div class="pr-base lg:pr-lg w-1/2 flex-1 lg:w-full">
 	<a href="/" class="hidden lg:block">{@html linkText} ×</a>
 
 	<div class="gap-sm-mid block flex flex-col items-start lg:hidden">
 		<a href="/">
 			{#if formattedArtistList}
-				<p>× {formattedArtistList}</p>
+				<p>{formattedArtistList}</p>
 			{/if}
 
 			<p class="italic">{title}</p>
@@ -53,15 +53,17 @@
 			{/if}
 		</a>
 
-		<div>
-			<a
-				href={`${page.url.pathname}?view=images&layout=scroll`}
-				class={isScrollLayout ? 'text-blue' : ''}>Scroll</a
-			><span>,&nbsp;</span><a
-				href={`${page.url.pathname}?view=images&layout=overview`}
-				class={!isScrollLayout ? 'text-blue' : ''}>Overview</a
-			>
-		</div>
+		{#if isImagesView}
+			<div>
+				<a
+					href={`${page.url.pathname}?view=images&layout=scroll`}
+					class={isScrollLayout ? 'text-blue' : ''}>Scroll</a
+				><span>,&nbsp;</span><a
+					href={`${page.url.pathname}?view=images&layout=overview`}
+					class={!isScrollLayout ? 'text-blue' : ''}>Overview</a
+				>
+			</div>
+		{/if}
 	</div>
 </div>
 
