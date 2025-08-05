@@ -5,6 +5,7 @@
 	let lastName = $state('');
 	let email = $state('');
 	let buttonText = $state('Subscribe');
+	let submitted = $state(false);
 
 	let allFieldsFilled = $derived(
 		firstName !== '' && lastName !== '' && email !== '' && EmailValidator.validate(email)
@@ -16,6 +17,7 @@
 		lastName = '';
 		email = '';
 		buttonText = 'Subscribe';
+		submitted = false;
 	};
 
 	// handle submit
@@ -57,14 +59,12 @@
 
 		// check if successful or not
 		if (subscribeConfirm.status === 'success') {
-			buttonText = 'Subscribed!';
-			firstName = '';
-			lastName = '';
-			email = '';
+			buttonText = 'Subscribed';
+			submitted = true;
 
-			setTimeout(() => {
-				buttonText = 'Subscribe';
-			}, 1200);
+			// setTimeout(() => {
+			// 	buttonText = 'Subscribe';
+			// }, 1200);
 		} else {
 			console.error(subscribeConfirm.data);
 
@@ -73,25 +73,31 @@
 			resetForm();
 		}
 	};
+
+	const handleFormClick = () => {
+		if (submitted) {
+			resetForm();
+		}
+	};
 </script>
 
 <form class="email-form" onsubmit={handleSubmit}>
 	<div class="main-fields">
 		<div class="input-wrapper">
-			<input type="text" placeholder="First Name" bind:value={firstName} />
+			<input type="text" placeholder="First Name" bind:value={firstName} onfocus={handleFormClick} />
 		</div>
 
 		<div class="input-wrapper">
-			<input type="text" placeholder="Last Name" bind:value={lastName} />
+			<input type="text" placeholder="Last Name" bind:value={lastName} onfocus={handleFormClick} />
 		</div>
 
 		<div class="input-wrapper">
-			<input type="email" placeholder="Email Address" bind:value={email} />
+			<input type="email" placeholder="Email Address" bind:value={email} onfocus={handleFormClick} />
 		</div>
 	</div>
 
 	<div class="submit-container flex justify-center">
-		<button type="submit" disabled={!allFieldsFilled}>{buttonText}</button>
+		<button type="submit" disabled={submitted || !allFieldsFilled}>{buttonText}</button>
 	</div>
 </form>
 

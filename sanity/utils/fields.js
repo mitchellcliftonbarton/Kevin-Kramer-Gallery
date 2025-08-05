@@ -78,6 +78,12 @@ export const Image = [
         type: 'string',
         title: 'Alt text',
       },
+      // {
+      //   name: 'is_detail',
+      //   type: 'boolean',
+      //   title: 'Is Detail',
+      //   description: 'If true, the image caption will be adjusted to show .',
+      // }
     ],
   },
 ]

@@ -23,7 +23,7 @@
 	});
 </script>
 
-<div class="past-exhibitions-list px-sm-mid lg:px-lg mt-base-mid lg:mt-line-break">
+<div class="past-exhibitions-list px-sm-mid lg:px-lg absolute top-0 left-0 w-full">
 	<div class="max-w-def-max mx-auto">
 		<div
 			class="flex flex-col items-start"
@@ -42,20 +42,21 @@
 	</div>
 </div>
 
-<div
-	class={`image relative hidden aspect-[4/3] lg:block ${currentImage ? 'opacity-100' : 'opacity-0'}`}
->
-	<img src={currentImage} alt="" />
+<div class="image-container fill-parent pointer-events-none flex items-end justify-start">
+	<div
+		class={`image hidden aspect-[4/3] lg:block ${currentImage ? 'opacity-100' : 'opacity-0'}`}
+	>
+		<img src={currentImage} alt="" />
+	</div>
 </div>
 
 <style>
 	.image {
-		position: fixed;
-		bottom: var(--spacing-base);
-		left: var(--spacing-base);
 		width: 250px;
+		position: sticky;
+		bottom: var(--spacing-base);
+		left: 0px;
 		overflow: hidden;
-		pointer-events: none;
 
 		img {
 			object-fit: cover;

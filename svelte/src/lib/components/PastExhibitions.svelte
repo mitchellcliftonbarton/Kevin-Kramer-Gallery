@@ -9,7 +9,7 @@
 	let isList = $state(false);
 </script>
 
-<section class="past-exhibitions px-sm-mid lg:px-base">
+<section class="past-exhibitions px-sm-mid lg:px-base" class:is-list={isList}>
 	<div class="title px-sm-mid lg:px-base flex flex-col lg:flex-row">
 		<div class="hidden flex-1 lg:block"></div>
 
@@ -30,9 +30,9 @@
 		</div>
 	</div>
 
-	{#if isList}
+	<div class="relative">
 		<PastExhibitionsList {pastExhibitions} />
-	{:else}
+
 		<div
 			class="past-exhibitions-grid gap-sm-mid lg:gap-base mt-base-mid lg:mt-line-break grid grid-cols-2"
 		>
@@ -40,7 +40,7 @@
 				<ExhibitionItemSmall {exhibition} />
 			{/each}
 		</div>
-	{/if}
+	</div>
 </section>
 
 <style>
@@ -48,6 +48,22 @@
 		button {
 			&.active {
 				color: var(--color-blue);
+			}
+		}
+	}
+
+	.past-exhibitions {
+		:global(.past-exhibitions-list) {
+			display: none;
+		}
+
+		&.is-list {
+			:global(.past-exhibitions-list) {
+				display: block;
+			}
+
+			.past-exhibitions-grid {
+				visibility: hidden;
 			}
 		}
 	}
