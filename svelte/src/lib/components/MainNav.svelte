@@ -47,7 +47,7 @@
 					</li>
 				</ul>
 
-				<a href="/information" class="lg:hover:text-blue">Close</a>
+				<a href="/information" class="hover:text-blue">Close</a>
 			{:else if isExhibitionDetailPage}
 				<ExhibitionTitleInfo />
 			{:else if isInformationPage}
@@ -59,7 +59,7 @@
 
 				<div class="flex flex-1 justify-end">
 					{#if isInformationPage}
-						<a href="/" class="lg:hover:text-blue">Close</a>
+						<a href="/" class="hover:text-blue">Close</a>
 					{/if}
 				</div>
 			{/if}
@@ -70,5 +70,10 @@
 <style>
 	header {
 		z-index: 2000;
+		pointer-events: none;
+
+		:global(a) {
+			pointer-events: auto;
+		}
 	}
 </style>

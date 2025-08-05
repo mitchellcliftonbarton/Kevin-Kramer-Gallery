@@ -6,7 +6,7 @@
 	import ImagesOverview from '$lib/components/ImagesOverview.svelte';
 	import { isWithinInterval } from 'date-fns';
 	import { page } from '$app/state';
-	import { replaceNewlinesInSpans, flattenExhibitionMedia } from '$lib/utils';
+	import { replaceNewlinesInSpans, flattenExhibitionMedia, formatDate, formatArtistList } from '$lib/utils';
 	import { toPlainText } from '@portabletext/svelte';
 	import EmblaCarousel from 'embla-carousel';
 	import { onMount } from 'svelte';
@@ -56,7 +56,8 @@
 		end_date,
 		exhibition_media,
 		alternate_location,
-		featured_image
+		featured_image,
+		artists
 	} = data?.exhibition;
 
 	// check if exhibition is current
@@ -69,6 +70,15 @@
 	const flattenedExhibitionMedia = $derived(
 		exhibition_media ? flattenExhibitionMedia(exhibition_media) : []
 	);
+
+	// formatted date
+	const formattedDate = formatDate({
+		startDate: start_date,
+		endDate: end_date
+	});
+
+	// formatted artist list
+	const formattedArtistList = formatArtistList(artists);
 
 	onMount(() => {
 		if (window !== undefined) {
@@ -151,8 +161,6 @@
 		startX = e.clientX;
 		startY = e.clientY;
 		mouseIsDown = true;
-
-		// console.log('mouse down');
 	}
 
 	// handle carousel mouse up
@@ -168,10 +176,6 @@
 			e.preventDefault(); // Prevent default action if necessary
 
 			carouselActive = false;
-
-			// console.log('mouse up, was click');
-		} else {
-			// console.log('mouse up, was drag');
 		}
 	}
 </script>
@@ -186,6 +190,34 @@
 	{/if}
 </svelte:head>
 
+<div class="mobile-title px-base-mid lg:hidden pt-base-mid">
+	<a href="/">
+		{#if formattedArtistList}
+			<p>{formattedArtistList}</p>
+		{/if}
+
+		<p class="italic">{title}</p>
+
+		{#if formattedDate && alternate_location}
+			<p>{formattedDate}<br />at {toPlainText(alternate_location)}</p>
+		{:else if formattedDate}
+			<p>{formattedDate}</p>
+		{/if}
+	</a>
+
+	{#if isImagesView}
+		<div>
+			<a
+				href={`${page.url.pathname}?view=images&layout=scroll`}
+				class={isScrollLayout ? 'text-blue' : ''}>Scroll</a
+			><span>,&nbsp;</span><a
+				href={`${page.url.pathname}?view=images&layout=overview`}
+				class={!isScrollLayout ? 'text-blue' : ''}>Overview</a
+			>
+		</div>
+	{/if}
+</div>
+
 <div class="exhibition-content">
 	{#if isImagesView && !isScrollLayout}
 		{#if flattenedExhibitionMedia}
@@ -196,7 +228,7 @@
 			<ImagesScroll media={flattenedExhibitionMedia} {setCarouselSlide} />
 		{/if}
 	{:else}
-		<div class="pt-xxl px-base-mid lg:px-lg pb-lg">
+		<div class="pt-lg-mid lg:pt-xxl px-base-mid lg:px-lg pb-lg">
 			<div class="max-w-def-max container mx-auto">
 				{#if exhibition_text || isCurrent || exhibition_details_override}
 					<section class="exhibition-text">
@@ -312,6 +344,12 @@
 	.press-items {
 		:global(& > * + *) {
 			margin-top: var(--spacing-line-break);
+		}
+	}
+
+	.mobile-title {
+		& > * + * {
+			margin-top: var(--spacing-sm-plus);
 		}
 	}
 

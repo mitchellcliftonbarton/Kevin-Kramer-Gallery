@@ -37,34 +37,6 @@
 
 <div class="pr-base lg:pr-lg w-1/2 flex-1 lg:w-full">
 	<a href="/" class="hidden lg:block">{@html linkText} ×</a>
-
-	<div class="gap-sm-mid block flex flex-col items-start lg:hidden">
-		<a href="/">
-			{#if formattedArtistList}
-				<p>{formattedArtistList}</p>
-			{/if}
-
-			<p class="italic">{title}</p>
-
-			{#if formattedDate && alternate_location}
-				<p>{formattedDate}<br />at {toPlainText(alternate_location)}</p>
-			{:else if formattedDate}
-				<p>{formattedDate}</p>
-			{/if}
-		</a>
-
-		{#if isImagesView}
-			<div>
-				<a
-					href={`${page.url.pathname}?view=images&layout=scroll`}
-					class={isScrollLayout ? 'text-blue' : ''}>Scroll</a
-				><span>,&nbsp;</span><a
-					href={`${page.url.pathname}?view=images&layout=overview`}
-					class={!isScrollLayout ? 'text-blue' : ''}>Overview</a
-				>
-			</div>
-		{/if}
-	</div>
 </div>
 
 {#if !isImagesView}

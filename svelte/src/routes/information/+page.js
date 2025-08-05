@@ -3,7 +3,13 @@ import { client } from '$lib/sanity/client.js';
 export const load = async () => {
 	const informationData = await client.fetch(
 		`*[_type == "informationPage"][0]{
-      newsletter_title
+      newsletter_title,
+			image{
+				asset->{
+					...,
+					metadata
+				}
+			},
     }`
 	);
 
@@ -15,9 +21,10 @@ export const load = async () => {
 	}
 
 	// destructure the data a bit
-	const { newsletter_title } = informationData;
+	const { newsletter_title, image } = informationData;
 
 	return {
-		newsletter_title
+		newsletter_title,
+		image
 	};
 };

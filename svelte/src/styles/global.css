@@ -17,7 +17,7 @@
 @theme {
 	--text-sm: 1.2rem;
 	--text-sm--line-height: 1.25;
-	--text-sm-plus: 1.5rem;
+	--text-sm-plus: 1.55rem;
 	--text-sm-plus--line-height: 1.25;
 	--text-base: 1.8rem;
 	--text-base--line-height: 1.25;
@@ -45,11 +45,12 @@
 	--spacing-lg-mid: 5.6rem;
 	--spacing-xl-minus: 8.4rem;
 	--spacing-xl: 10rem;
-	--spacing-xxl: 15rem;
+	--spacing-xxl: 15rem;--
 	--spacing-xxxl: 20rem;
 	--spacing-rich-text: 1em;
 	--spacing-line-break: 1.25em;
 	--spacing-def-max: 576px;
+	--spacing-mobile-push: 9.6rem;
 
 	--font-primary: 'Stempel Garamond', serif;
 }
@@ -118,10 +119,14 @@ button {
 
 	&:not(.links-fade) {
 		a {
-			@media (min-width: 1024px) {
+			/* @media (min-width: 1024px) {
 				&:hover {
 					color: var(--color-blue);
 				}
+			} */
+
+			&:hover {
+				color: var(--color-blue);
 			}
 		}
 	}
@@ -130,10 +135,14 @@ button {
 		a {
 			transition: opacity 0.3s;
 
-			@media (min-width: 1024px) {
+			/* @media (min-width: 1024px) {
 				&:hover {
 					opacity: 0.5;
 				}
+			} */
+
+			&:hover {
+				opacity: 0.5;
 			}
 		}
 	}

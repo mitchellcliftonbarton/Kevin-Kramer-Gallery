@@ -34,15 +34,6 @@ export const load = async ({ params }) => {
 						...,
 						metadata
 					}
-				},
-				video_type,
-				vimeo_url,
-				poster{
-					asset->{
-						...,
-						metadata
-					},
-					alt
 				}
 			},
 			caption[]

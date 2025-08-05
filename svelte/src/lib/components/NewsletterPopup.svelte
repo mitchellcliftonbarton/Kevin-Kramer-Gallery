@@ -23,9 +23,9 @@
 	<div
 		class="modal bg-yellow lg:bg-green py-lg px-lg lg:px-xl flex flex-col items-center justify-center"
 	>
-		<p class="hidden text-center lg:block">Mailing List</p>
+		<p class="text-center">Mailing List</p>
 
-		<NewsletterForm title="Mailing List" />
+		<NewsletterForm />
 	</div>
 </div>
 
@@ -61,12 +61,11 @@
 
 	.modal {
 		width: calc(100% - 28px);
-		aspect-ratio: 3/4;
+		aspect-ratio: 4/3;
 		z-index: 10;
 		position: relative;
 
 		@media (min-width: 1024px) {
-			aspect-ratio: 4/3;
 			width: 50%;
 			min-width: 400px;
 			max-width: 900px;
@@ -76,13 +75,12 @@
 			width: 100%;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-between;
-			height: 100%;
+			height: auto;
+			justify-content: center;
+			margin-top: var(--spacing-base);
 
 			@media (min-width: 1024px) {
 				margin-top: var(--spacing-lg);
-				height: auto;
-				justify-content: center;
 			}
 		}
 
@@ -91,16 +89,22 @@
 		}
 
 		:global(.email-form > * + .submit-container) {
+			margin-top: 4rem;
+
 			@media (min-width: 1024px) {
-				margin-top: 68px;
+				margin-top: 6.8rem;
 			}
 		}
 
 		:global(.email-form .submit-container button[type='submit']:not(:disabled)) {
-			@media (min-width: 1024px) {
+			/* @media (min-width: 1024px) {
 				&:hover {
 					color: var(--color-white);
 				}
+			} */
+
+			&:hover {
+				color: var(--color-white);
 			}
 		}
 	}

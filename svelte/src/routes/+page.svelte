@@ -27,7 +27,7 @@
 	<meta property="og:title" content="Kevin Kramer Gallery" />
 </svelte:head>
 
-<div class="home pt-lg lg:pt-xxl">
+<div class="home pt-mobile-push lg:pt-xxl">
 	{#if alert}
 		<section class="alert text-green rich-text px-sm-mid lg:px-lg col-span-2">
 			<Portable value={alert} />

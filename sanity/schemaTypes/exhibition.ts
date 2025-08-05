@@ -1,4 +1,5 @@
 import {RichText, Image, Video} from '../utils/fields'
+import {toPlainText, getMediaPreview} from '../utils/utils'
 
 export default {
   name: 'exhibition',
@@ -108,11 +109,31 @@ export default {
               hidden: ({document}: {document: {is_solo?: boolean}}) => document.is_solo,
             },
           ],
+          preview: {
+            select: {
+              caption: 'caption',
+              media: 'media',
+            },
+            prepare(selection: any) {
+              const {caption, media} = selection
+
+              const plainCaption = toPlainText(caption)
+
+              // get media
+              const hasMedia = media?.length > 0
+              let firstMedia = hasMedia ? media[0] : null
+
+              // get media preview
+              let mediaPreview = firstMedia ? getMediaPreview(firstMedia) : null
+
+              return {
+                title: plainCaption ? plainCaption : '---',
+                media: mediaPreview,
+              }
+            },
+          },
         },
       ],
-      // options: {
-      //   layout: 'grid',
-      // },
     },
     {
       name: 'exhibition_text',

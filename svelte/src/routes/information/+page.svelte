@@ -7,7 +7,7 @@
 	let { data } = $props();
 
 	// destructure the data
-	const { newsletter_title, siteSettings } = data;
+	const { newsletter_title, siteSettings, image } = data;
 
 	// destructure site settings
 	const { alert, address, hours, email, contactInformation, socialLinks } = siteSettings;
@@ -18,13 +18,19 @@
 	<meta property="og:title" content="Information | Kevin Kramer Gallery" />
 </svelte:head>
 
-<div class="pt-xxl flex min-h-[100svh] flex-col justify-between lg:pt-0">
-	<div class="px-base-mid lg:px-lg flex flex-1 items-center justify-center">
+<div class="pt-mobile-push lg:pt-0 flex min-h-[100svh] flex-col justify-between">
+	<div class="px-base-mid lg:px-lg flex flex-1 items-center justify-center lg:pt-xl">
 		<div class="gap-lg lg:gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">
 			{#if alert}
 				<div class="alert text-green rich-text col-span-2 hidden lg:block">
 					<Portable value={alert} />
 				</div>
+			{/if}
+
+			{#if image}
+				<figure class="col-span-2 aspect-[4/3] relative bg-grey-1">
+					<img data-src={image.asset.url} alt="" class="lazyload h-full w-full object-cover object-center" />
+				</figure>
 			{/if}
 
 			<div class="info col-span-2 lg:col-span-1">
@@ -73,10 +79,10 @@
 		<nav class="flex-1 lg:flex-none">
 			<ul class="flex flex-col items-start lg:flex-row lg:items-center lg:gap-[0.2em]">
 				<li>
-					<a href="/accessibility">Accessibility</a><span>,</span>
+					<a href="/accessibility">Accessibility</a><span class="hidden lg:inline">,</span>
 				</li>
 				<li>
-					<a href="/privacy">Privacy</a><span>,</span>
+					<a href="/privacy">Privacy</a><span class="hidden lg:inline">,</span>
 				</li>
 				<li>
 					<a href="/terms">Terms & Conditions</a>
@@ -103,10 +109,14 @@
 <style>
 	.other-links {
 		a {
-			@media (min-width: 1024px) {
+			/* @media (min-width: 1024px) {
 				&:hover {
 					color: var(--color-blue);
 				}
+			} */
+
+			&:hover {
+				color: var(--color-blue);
 			}
 		}
 	}
@@ -129,10 +139,14 @@
 		}
 
 		:global(.email-form .submit-container button[type='submit']:not(:disabled)) {
-			@media (min-width: 1024px) {
+			/* @media (min-width: 1024px) {
 				&:hover {
 					color: var(--color-blue);
 				}
+			} */
+
+			&:hover {
+				color: var(--color-blue);
 			}
 		}
 	}

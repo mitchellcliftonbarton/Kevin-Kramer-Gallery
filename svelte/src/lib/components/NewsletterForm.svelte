@@ -1,9 +1,6 @@
 <script>
 	import EmailValidator from 'email-validator';
 
-	// props
-	let { title } = $props();
-
 	let firstName = $state('');
 	let lastName = $state('');
 	let email = $state('');
@@ -79,10 +76,6 @@
 </script>
 
 <form class="email-form" onsubmit={handleSubmit}>
-	{#if title}
-		<p class="text-center lg:hidden">{title}</p>
-	{/if}
-
 	<div class="main-fields">
 		<div class="input-wrapper">
 			<input type="text" placeholder="First Name" bind:value={firstName} />

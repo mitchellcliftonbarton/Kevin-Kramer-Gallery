@@ -10,6 +10,12 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: 'image',
+      type: 'image',
+      title: 'Image',
+      description: 'If present, this image will be displayed at the top of the page.',
+    },
+    {
       name: 'newsletter_title',
       type: 'string',
       title: 'Newsletter Title',

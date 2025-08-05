@@ -23,7 +23,7 @@
 	});
 </script>
 
-<div class="past-exhibitions-list lg:px-lg mt-base-mid lg:mt-line-break">
+<div class="past-exhibitions-list px-sm-mid lg:px-lg mt-base-mid lg:mt-line-break">
 	<div class="max-w-def-max mx-auto">
 		<div
 			class="flex flex-col items-start"
@@ -33,7 +33,7 @@
 			{#each pastExhibitions as exhibition}
 				<a
 					href={`/exhibitions/${exhibition.slug.current}`}
-					class="lg:hover:text-blue"
+					class="hover:text-blue"
 					onmouseenter={() => handleMouseEnter(exhibition)}
 					>{@html formatExhibitionTitle(exhibition)}</a
 				>

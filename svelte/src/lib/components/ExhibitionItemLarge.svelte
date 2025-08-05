@@ -61,14 +61,6 @@
 </a>
 
 <style>
-	a {
-		@media (min-width: 1024px) {
-			&:hover {
-				color: var(--color-blue);
-			}
-		}
-	}
-
 	.exhibition-item-large {
 		& > * + * {
 			margin-top: var(--spacing-sm-mid);
