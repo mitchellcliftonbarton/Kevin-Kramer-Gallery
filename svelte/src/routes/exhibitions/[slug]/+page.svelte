@@ -93,6 +93,8 @@
 			isLargeQuery = window.matchMedia('(min-width: 1024px)').matches;
 
 			isTouchDevice = 'ontouchstart' in window;
+
+			console.log('isTouchDevice', isTouchDevice);
 		}
 
 		if (swiperEl) {
@@ -200,26 +202,30 @@
 
 	// handle carousel touch start
 	function handleCarouselTouchStart(e) {
-		touchStarted = true;
-		const touch = e.touches[0];
-		startX = touch.clientX;
-		startY = touch.clientY;
-		console.log('starting touch');
+		if (isTouchDevice) {
+			touchStarted = true;
+			const touch = e.touches[0];
+			startX = touch.clientX;
+			startY = touch.clientY;
+			console.log('starting touch');
+		}
 	}
 
 	// handle carousel touch end
 	function handleCarouselTouchEnd(e) {
-		touchStarted = false;
-		const touch = e.touches[0];
-		const deltaX = touch.clientX - startX;
-		const deltaY = touch.clientY - startY;
+		if (isTouchDevice) {
+			touchStarted = false;
+			const touch = e.changedTouches[0];
+			const deltaX = touch.clientX - startX;
+			const deltaY = touch.clientY - startY;
 
-		if (Math.abs(deltaX) <= threshold && Math.abs(deltaY) <= threshold) {
-			e.preventDefault();
-			carouselActive = false;
-			console.log('ended touch, closing carousel');
-		} else {
-			console.log('ended touch, not closing carousel');
+			if (Math.abs(deltaX) <= threshold && Math.abs(deltaY) <= threshold) {
+				e.preventDefault();
+				carouselActive = false;
+				console.log('ended touch, closing carousel');
+			} else {
+				console.log('ended touch, not closing carousel');
+			}
 		}
 	}
 </script>
