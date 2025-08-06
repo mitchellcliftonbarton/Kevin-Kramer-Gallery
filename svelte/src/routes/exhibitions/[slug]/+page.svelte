@@ -6,28 +6,36 @@
 	import ImagesOverview from '$lib/components/ImagesOverview.svelte';
 	import { isWithinInterval } from 'date-fns';
 	import { page } from '$app/state';
-	import { replaceNewlinesInSpans, flattenExhibitionMedia, formatDate, formatArtistList } from '$lib/utils';
+	import {
+		replaceNewlinesInSpans,
+		flattenExhibitionMedia,
+		formatDate,
+		formatArtistList
+	} from '$lib/utils';
 	import { toPlainText } from '@portabletext/svelte';
-	import EmblaCarousel from 'embla-carousel';
 	import { onMount } from 'svelte';
+	import Swiper from 'swiper';
+	import 'swiper/swiper-bundle.css';
 
 	// props
 	let { data } = $props();
 
 	// state
-	let emblaApi = $state(null);
-	let emblaEl = $state(null);
+	let swiperApi = $state(null);
+	let swiperEl = $state(null);
 	let carouselInit = $state(false);
-	let emblaSlides = $state(null);
-	let emblaVideoEls = $state(null);
+	let slides = $state(null);
+	let videoSlideEls = $state([]);
 	let carouselActive = $state(false);
 	let isLargeQuery = $state(false);
+	let isTouchDevice = $state(false);
 
 	// state for checking carousel clicks
 	let startX = $state(null);
 	let startY = $state(null);
 	let threshold = 2;
 	let mouseIsDown = $state(false);
+	let touchStarted = $state(false);
 
 	// check if 'view' is in search params
 	const isImagesView = $derived(page.url.searchParams.get('view') === 'images');
@@ -83,62 +91,69 @@
 	onMount(() => {
 		if (window !== undefined) {
 			isLargeQuery = window.matchMedia('(min-width: 1024px)').matches;
+
+			isTouchDevice = 'ontouchstart' in window;
 		}
 
-		if (emblaEl) {
-			emblaApi = EmblaCarousel(emblaEl, {
+		if (swiperEl) {
+			swiperApi = new Swiper(swiperEl, {
 				loop: true,
-				dragThreshold: 8,
-				duration: 20,
-				startIndex: 0
-				// watchDrag: !isLargeQuery
-			});
+				spaceBetween: 0,
+				slidesPerView: 1,
+				speed: isLargeQuery ? 0 : 300,
+				allowTouchMove: !isLargeQuery,
+				on: {
+					init: (swiper) => {
+						carouselInit = true;
 
-			emblaApi.on('init', () => {
-				carouselInit = true;
-				emblaSlides = emblaApi.slideNodes();
+						// set slides
+						slides = swiper.slides;
 
-				let videoEls = [];
+						// set video slide els
+						slides.forEach((slide) => {
+							let videoEl = slide.querySelector('video');
 
-				// loop through slides and find video elements
-				emblaSlides.forEach((slide) => {
-					let videoEl = slide.querySelector('video');
-					if (videoEl) {
-						videoEls.push(videoEl);
+							if (videoEl) {
+								videoSlideEls.push(videoEl);
+							}
+						});
+					},
+					slideChange: () => {
+						if (videoSlideEls) {
+							videoSlideEls.forEach((videoEl) => {
+								videoEl.currentTime = 0;
+							});
+						}
 					}
-				});
-
-				emblaVideoEls = videoEls;
-			});
-
-			emblaApi.on('select', () => {
-				emblaVideoEls.forEach((videoEl) => {
-					videoEl.currentTime = 0;
-				});
+				}
 			});
 		}
 	});
 
 	// keyboard events
 	function onKeyDown(event) {
-		if (!emblaApi) return;
+		if (!swiperApi) return;
 
 		if (event.key === 'ArrowRight') {
-			emblaApi.scrollNext();
+			swiperApi.slideNext();
 		} else if (event.key === 'ArrowLeft') {
-			emblaApi.scrollPrev();
-		} else if (event.key === 'Escape') {
-			carouselActive = false;
+			swiperApi.slidePrev();
 		}
 	}
 
 	// set carousel slide
 	function setCarouselSlide(slideIndex) {
-		emblaVideoEls.forEach((videoEl) => {
-			videoEl.currentTime = 0;
-		});
+		if (videoSlideEls) {
+			videoSlideEls.forEach((videoEl) => {
+				videoEl.currentTime = 0;
+			});
+		}
 
-		emblaApi.scrollTo(slideIndex, true);
+		if (swiperApi) {
+			// slide to with no animation
+			swiperApi.slideToLoop(slideIndex, 0);
+		}
+
 		carouselActive = true;
 	}
 
@@ -158,24 +173,53 @@
 
 	// handle carousel mouse down
 	function handleCarouselMouseDown(e) {
-		startX = e.clientX;
-		startY = e.clientY;
-		mouseIsDown = true;
+		if (isLargeQuery && !isTouchDevice) {
+			startX = e.clientX;
+			startY = e.clientY;
+			mouseIsDown = true;
+		}
 	}
 
 	// handle carousel mouse up
 	function handleCarouselMouseUp(e) {
-		mouseIsDown = false;
+		if (isLargeQuery && !isTouchDevice) {
+			mouseIsDown = false;
 
-		const deltaX = e.clientX - startX;
-		const deltaY = e.clientY - startY;
+			const deltaX = e.clientX - startX;
+			const deltaY = e.clientY - startY;
 
-		// Check if the movement is within the threshold
+			// Check if the movement is within the threshold
+			if (Math.abs(deltaX) <= threshold && Math.abs(deltaY) <= threshold) {
+				// This is a click action
+				e.preventDefault(); // Prevent default action if necessary
+
+				carouselActive = false;
+			}
+		}
+	}
+
+	// handle carousel touch start
+	function handleCarouselTouchStart(e) {
+		touchStarted = true;
+		const touch = e.touches[0];
+		startX = touch.clientX;
+		startY = touch.clientY;
+		console.log('starting touch');
+	}
+
+	// handle carousel touch end
+	function handleCarouselTouchEnd(e) {
+		touchStarted = false;
+		const touch = e.touches[0];
+		const deltaX = touch.clientX - startX;
+		const deltaY = touch.clientY - startY;
+
 		if (Math.abs(deltaX) <= threshold && Math.abs(deltaY) <= threshold) {
-			// This is a click action
-			e.preventDefault(); // Prevent default action if necessary
-
+			e.preventDefault();
 			carouselActive = false;
+			console.log('ended touch, closing carousel');
+		} else {
+			console.log('ended touch, not closing carousel');
 		}
 	}
 </script>
@@ -190,7 +234,7 @@
 	{/if}
 </svelte:head>
 
-<div class="mobile-title px-base-mid lg:hidden pt-base-mid">
+<div class="mobile-title px-base-mid pt-base-mid lg:hidden">
 	<a href="/">
 		{#if formattedArtistList}
 			<p>{formattedArtistList}</p>
@@ -237,11 +281,11 @@
 						</div>
 
 						{#if exhibition_details_override}
-							<div class="rich-text text-sm">
+							<div class="rich-text text-sm lg:text-xs">
 								<Portable value={exhibition_details_override} />
 							</div>
 						{:else if isCurrent}
-							<div class="rich-text text-sm">
+							<div class="rich-text text-sm lg:text-xs">
 								{#if alternate_location}
 									<Portable value={alternate_location} />
 								{:else}
@@ -249,7 +293,7 @@
 								{/if}
 							</div>
 						{:else if alternate_location}
-							<div class="rich-text text-sm">
+							<div class="rich-text text-sm lg:text-xs">
 								<Portable value={alternate_location} />
 							</div>
 						{/if}
@@ -284,14 +328,16 @@
 	onmousedown={(e) => handleCarouselMouseDown(e)}
 	onmouseup={(e) => handleCarouselMouseUp(e)}
 	onclick={(e) => handleCarouselClick(e)}
+	ontouchstart={(e) => handleCarouselTouchStart(e)}
+	ontouchend={(e) => handleCarouselTouchEnd(e)}
 	aria-hidden={!carouselActive}
 >
-	<div class="embla" bind:this={emblaEl}>
-		<div class="embla__container">
-			{#each flattenedExhibitionMedia as media}
+	<div class="swiper" bind:this={swiperEl}>
+		<div class="swiper-wrapper">
+			{#each flattenedExhibitionMedia as media, index}
 				{#if media?._type === 'Image'}
 					<div
-						class={`embla__slide relative ${media?.asset?.metadata?.dimensions?.aspectRatio > 1 ? 'landscape' : 'portrait'}`}
+						class={`swiper-slide relative ${media?.asset?.metadata?.dimensions?.aspectRatio > 1 ? 'landscape' : 'portrait'}`}
 					>
 						<figure>
 							<img
@@ -302,7 +348,7 @@
 						</figure>
 					</div>
 				{:else if media?._type === 'Video'}
-					<div class="embla__slide video relative">
+					<div class="swiper-slide video relative">
 						<figure>
 							<video
 								src={media?.file?.asset?.url}
@@ -364,7 +410,51 @@
 			pointer-events: auto;
 		}
 
-		.embla {
+		.swiper {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+
+			.swiper-slide {
+				cursor: pointer;
+				padding: var(--spacing-base-mid);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
+
+				@media screen and (min-width: 1024px) {
+					padding: var(--spacing-lg);
+				}
+
+				figure {
+					max-height: 100%;
+					max-width: 100%;
+				}
+
+				&.landscape {
+					figure {
+						aspect-ratio: 4/3;
+					}
+				}
+
+				&.portrait {
+					figure {
+						aspect-ratio: 3/4;
+					}
+				}
+
+				&.video {
+					figure {
+						aspect-ratio: 16/9;
+					}
+				}
+			}
+		}
+
+		/* .embla {
 			overflow: hidden;
 			position: absolute;
 			top: 0px;
@@ -420,6 +510,6 @@
 					aspect-ratio: 16/9;
 				}
 			}
-		}
+		} */
 	}
 </style>

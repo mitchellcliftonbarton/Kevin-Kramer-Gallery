@@ -23,7 +23,7 @@
 <footer
 	class="px-base-mid lg:px-lg pb-base-mid lg:pb-lg gap-base lg:gap-base mt-xxl lg:mt-xxxl grid grid-cols-12"
 >
-	<div class="col-span-12 lg:col-span-6">
+	<div class="col-span-12 text-sm lg:col-span-6 lg:text-base">
 		{#if address}
 			<div class="rich-text text-blue links-fade">
 				<Portable value={addressNoBreaks} />
@@ -37,7 +37,7 @@
 		{/if}
 	</div>
 
-	<div class="col-span-12 lg:col-span-3">
+	<div class="col-span-12 text-sm lg:col-span-3 lg:text-base">
 		{#if email}
 			<CopyButton
 				textToCopy={email}
@@ -53,7 +53,7 @@
 		{/if}
 	</div>
 
-	<div class="text-blue col-span-12 flex flex-col items-start lg:col-span-3">
+	<div class="text-blue col-span-12 flex flex-col items-start text-sm lg:col-span-3 lg:text-base">
 		<button
 			onclick={openNewsletterPopup}
 			class="transition-opacity duration-300 lg:hover:opacity-50"

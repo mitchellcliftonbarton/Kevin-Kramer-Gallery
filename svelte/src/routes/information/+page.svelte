@@ -18,8 +18,8 @@
 	<meta property="og:title" content="Information | Kevin Kramer Gallery" />
 </svelte:head>
 
-<div class="pt-mobile-push lg:pt-0 flex min-h-[100svh] flex-col justify-between">
-	<div class="px-base-mid lg:px-lg flex flex-1 items-center justify-center lg:pt-xl">
+<div class="pt-mobile-push flex min-h-[100svh] flex-col justify-between lg:pt-0">
+	<div class="px-base-mid lg:px-lg lg:pt-xl flex flex-1 items-center justify-center">
 		<div class="gap-lg lg:gap-base max-w-def-max grid w-full grid-cols-2 lg:w-1/2">
 			{#if alert}
 				<div class="alert text-green rich-text col-span-2 hidden lg:block">
@@ -28,8 +28,12 @@
 			{/if}
 
 			{#if image}
-				<figure class="col-span-2 aspect-[4/3] relative bg-grey-1">
-					<img data-src={image.asset.url} alt="" class="lazyload h-full w-full object-cover object-center" />
+				<figure class="bg-grey-1 relative col-span-2 aspect-[4/3]">
+					<img
+						data-src={image.asset.url}
+						alt=""
+						class="lazyload h-full w-full object-cover object-center"
+					/>
 				</figure>
 			{/if}
 
@@ -75,7 +79,9 @@
 		</div>
 	</div>
 
-	<div class="other-links px-base-mid pb-base-mid pt-xl lg:p-lg flex justify-start gap-5 text-sm">
+	<div
+		class="other-links px-base-mid pb-base-mid pt-xl lg:p-lg flex justify-start gap-5 text-sm lg:text-xs"
+	>
 		<nav class="flex-1 lg:flex-none">
 			<ul class="flex flex-col items-start lg:flex-row lg:items-center lg:gap-[0.2em]">
 				<li>

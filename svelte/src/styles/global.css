@@ -15,9 +15,11 @@
 }
 
 @theme {
-	--text-sm: 1.2rem;
+	--text-xs: 1.2rem;
+	--text-xs--line-height: 1.25;
+	--text-sm: 1.3rem;
 	--text-sm--line-height: 1.25;
-	--text-sm-plus: 1.55rem;
+	--text-sm-plus: 1.6rem;
 	--text-sm-plus--line-height: 1.25;
 	--text-base: 1.8rem;
 	--text-base--line-height: 1.25;

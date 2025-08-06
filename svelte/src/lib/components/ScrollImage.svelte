@@ -56,7 +56,7 @@
 	</figure>
 
 	{#if caption}
-		<div class="px-sm mt-xs lg:mt-sm flex items-start gap-4 text-left text-sm">
+		<div class="px-sm mt-xs lg:mt-sm flex items-start gap-4 text-left text-sm lg:text-xs">
 			<p>{indexText}</p>
 
 			<Portable value={caption} />
