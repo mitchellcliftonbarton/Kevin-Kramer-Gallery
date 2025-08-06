@@ -1,58 +1,106 @@
 <script>
 	import MainHomeLink from '$lib/components/MainHomeLink.svelte';
 	import { onMount, onDestroy } from 'svelte';
+	import { gsap } from 'gsap/all';
 
 	let headerElement;
-	let isVisible = $state(false);
-	let isScrollingDown = $state(false);
-	let lastScrollY = $state(0);
-	let triggerDistance = $state(100);
+	let lastScrollTop = $state(0);
+	let hasScrolled = $state(false);
+	let headerHeight = $state(0);
+	let currentTranslateY = $state(0);
+	let isOpacityZero = $state(false);
+	let ticking = false;
 
-	// Handle scroll event
-	const handleScroll = () => {
-		if (typeof window === 'undefined') return;
+	function updateHeader() {
+		// get scroll top
+		let st = window.pageYOffset || window.scrollY;
+		let scrollDelta = st - lastScrollTop;
 
-		const scrollY = window.scrollY;
-		const isPastThreshold = scrollY > triggerDistance;
-
-		if (isPastThreshold) {
-			// Only track scroll direction when past threshold
-			const isScrollingUp = scrollY < lastScrollY;
-			isScrollingDown = !isScrollingUp;
-			isVisible = isScrollingUp; // Show when scrolling up
-		} else {
-			// Always show when within 100px of top
-			isVisible = true;
-			isScrollingDown = false;
+		// Only proceed if there's actual scroll movement
+		if (Math.abs(scrollDelta) < 1) {
+			lastScrollTop = st;
+			return;
 		}
 
-		lastScrollY = scrollY;
-	};
+		if (st > lastScrollTop) {
+			// WE ARE SCROLLING DOWN
+
+			// Calculate new translate position (move header up)
+			const newTranslateY = Math.min(currentTranslateY + Math.abs(scrollDelta), headerHeight);
+
+			if (newTranslateY !== currentTranslateY) {
+				currentTranslateY = newTranslateY;
+				headerElement.style.transform = `translate3d(0, -${currentTranslateY}px, 0)`;
+
+				if (isOpacityZero) {
+					headerElement.style.opacity = '1';
+					isOpacityZero = false;
+				}
+			}
+		} else if (st < lastScrollTop) {
+			// WE ARE SCROLLING UP
+
+			if (currentTranslateY >= headerHeight) {
+				// Header is completely out of view - snap back and fade in
+				currentTranslateY = 0;
+				headerElement.style.transform = 'translate3d(0, 0px, 0)';
+				headerElement.style.opacity = '0';
+				headerElement.style.transition = '';
+				isOpacityZero = true;
+			} else {
+				// Header is partially visible - translate back at scroll speed
+				const newTranslateY = Math.max(currentTranslateY - Math.abs(scrollDelta), 0);
+
+				if (newTranslateY !== currentTranslateY) {
+					currentTranslateY = newTranslateY;
+					headerElement.style.transform = `translate3d(0, -${currentTranslateY}px, 0)`;
+				}
+
+				// check if opacity is 0
+				if (isOpacityZero) {
+					headerElement.style.transition = 'opacity 0.4s';
+					headerElement.style.opacity = '1';
+					isOpacityZero = false;
+				}
+			}
+		}
+
+		lastScrollTop = st < 0 ? 0 : st;
+		hasScrolled = true;
+		ticking = false;
+	}
+
+	function requestTick() {
+		if (!ticking) {
+			requestAnimationFrame(updateHeader);
+			ticking = true;
+		}
+	}
+
+	function watch() {
+		requestTick();
+	}
 
 	onMount(() => {
 		// Only run in browser
 		if (typeof window === 'undefined') return;
 
-		// Add scroll listener
-		window.addEventListener('scroll', handleScroll);
+		// set header height
+		headerHeight = headerElement.offsetHeight;
 
-		// Check initial scroll position
-		handleScroll();
+		window.addEventListener('scroll', watch);
 	});
 
 	onDestroy(() => {
-		// Clean up scroll listener
 		if (typeof window !== 'undefined') {
-			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('scroll', watch);
 		}
 	});
 </script>
 
 <header
 	bind:this={headerElement}
-	class="px-sm-mid lg:px-lg py-base-mid lg:py-lg-minus fixed top-0 left-0 w-full"
-	class:visible={isVisible}
-	class:scrolling-down={isScrollingDown}
+	class="px-sm-mid lg:px-lg py-base-mid lg:py-lg-minus fixed top-0 left-0 z-50 w-full"
 >
 	<nav class="flex justify-center">
 		<MainHomeLink />
@@ -62,28 +110,12 @@
 <style>
 	header {
 		pointer-events: none;
+		will-change: transform, opacity;
+		transform: translateZ(0); /* Force hardware acceleration */
+		backface-visibility: hidden; /* Prevent flickering */
 
 		:global(a) {
-			transform: translateY(-15px);
 			pointer-events: auto;
-			transition:
-				opacity 0.3s,
-				transform 0.3s;
-		}
-
-		&.visible {
-			:global(a) {
-				opacity: 1;
-				transform: translateY(0);
-				transition: opacity 0.3s;
-			}
-		}
-
-		&.scrolling-down {
-			:global(a) {
-				opacity: 0;
-				transform: translateY(-15px);
-			}
 		}
 	}
 </style>
