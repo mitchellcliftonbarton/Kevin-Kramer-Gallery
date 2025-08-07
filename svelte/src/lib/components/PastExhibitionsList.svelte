@@ -33,7 +33,7 @@
 			{#each pastExhibitions as exhibition}
 				<a
 					href={`/exhibitions/${exhibition.slug.current}`}
-					class="hover:text-blue"
+					class="past-exhibitions-list-item inline-block"
 					onmouseenter={() => handleMouseEnter(exhibition)}
 					>{@html formatExhibitionTitle(exhibition)}</a
 				>
@@ -43,9 +43,7 @@
 </div>
 
 <div class="image-container fill-parent pointer-events-none flex items-end justify-start">
-	<div
-		class={`image hidden aspect-[4/3] lg:block ${currentImage ? 'opacity-100' : 'opacity-0'}`}
-	>
+	<div class={`image hidden aspect-[4/3] lg:block ${currentImage ? 'opacity-100' : 'opacity-0'}`}>
 		<img src={currentImage} alt="" />
 	</div>
 </div>
@@ -63,6 +61,20 @@
 			object-position: center;
 			width: 100%;
 			height: 100%;
+		}
+	}
+
+	.past-exhibitions-list-item {
+		padding-left: var(--spacing-sm-mid);
+		text-indent: calc(var(--spacing-sm-mid) * -1);
+
+		@media (min-width: 1024px) {
+			padding-left: var(--spacing-base);
+			text-indent: calc(var(--spacing-base) * -1);
+		}
+
+		&:hover {
+			color: var(--color-blue);
 		}
 	}
 </style>

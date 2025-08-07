@@ -38,7 +38,7 @@
 	class={`media-item ${isLandscape ? 'landscape' : 'portrait'}`}
 	onclick={() => setCarouselSlide(slideIndex)}
 >
-	<p class="text-left text-sm lg:text-xs">{indexText}</p>
+	<p class="text-left text-sm">{indexText}</p>
 
 	<figure class="relative">
 		{#if _type === 'Image' && asset?.url}
@@ -57,7 +57,7 @@
 	</figure>
 
 	{#if caption}
-		<div class="text-left text-sm lg:text-xs">
+		<div class="text-left text-sm">
 			<Portable value={caption} />
 		</div>
 	{/if}

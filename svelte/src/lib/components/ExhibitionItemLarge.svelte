@@ -69,5 +69,13 @@
 				margin-top: calc(var(--spacing-base) - 3px);
 			}
 		}
+
+		&:hover {
+			color: var(--color-blue);
+
+			@media (min-width: 1024px) {
+				color: inherit;
+			}
+		}
 	}
 </style>

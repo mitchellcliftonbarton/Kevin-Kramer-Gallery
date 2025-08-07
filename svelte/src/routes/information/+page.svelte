@@ -79,9 +79,7 @@
 		</div>
 	</div>
 
-	<div
-		class="other-links px-base-mid pb-base-mid pt-xl lg:p-lg flex justify-start gap-5 text-sm lg:text-xs"
-	>
+	<div class="other-links px-base-mid pb-base-mid pt-xl lg:p-lg flex justify-start gap-5 text-sm">
 		<nav class="flex-1 lg:flex-none">
 			<ul class="flex flex-col items-start lg:flex-row lg:items-center lg:gap-[0.2em]">
 				<li>
@@ -130,6 +128,14 @@
 	.info {
 		& > * + * {
 			margin-top: var(--spacing-line-break);
+		}
+	}
+
+	.info + .newsletter {
+		margin-top: var(--spacing-lg);
+
+		@media (min-width: 1024px) {
+			margin-top: 0;
 		}
 	}
 

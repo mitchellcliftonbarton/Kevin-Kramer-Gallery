@@ -287,11 +287,11 @@
 						</div>
 
 						{#if exhibition_details_override}
-							<div class="rich-text text-sm lg:text-xs">
+							<div class="rich-text text-sm">
 								<Portable value={exhibition_details_override} />
 							</div>
 						{:else if isCurrent}
-							<div class="rich-text text-sm lg:text-xs">
+							<div class="rich-text text-sm">
 								{#if alternate_location}
 									<Portable value={alternate_location} />
 								{:else}
@@ -299,7 +299,7 @@
 								{/if}
 							</div>
 						{:else if alternate_location}
-							<div class="rich-text text-sm lg:text-xs">
+							<div class="rich-text text-sm">
 								<Portable value={alternate_location} />
 							</div>
 						{/if}
