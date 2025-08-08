@@ -58,7 +58,7 @@
 	</figure>
 
 	{#if caption_override || caption}
-		<div class="px-sm mt-xs lg:mt-sm flex items-start gap-4 text-left text-sm">
+		<div class="px-sm lg:mt-sm mt-[.6rem] flex items-start gap-4 text-left text-sm">
 			<p>{indexText}</p>
 
 			<Portable value={caption_override || caption} />

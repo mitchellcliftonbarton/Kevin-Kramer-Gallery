@@ -63,10 +63,10 @@
 <style>
 	.exhibition-item-large {
 		& > * + * {
-			margin-top: var(--spacing-sm-mid);
+			margin-top: calc(var(--spacing-sm-mid) - 1px);
 
 			@media (min-width: 1024px) {
-				margin-top: calc(var(--spacing-base) - 3px);
+				margin-top: calc(var(--spacing-base) - 6px);
 			}
 		}
 

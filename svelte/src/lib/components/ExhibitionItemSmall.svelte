@@ -27,7 +27,7 @@
 		</figure>
 	{/if}
 
-	<div class="titles pl-sm-mid lg:px-base mt-sm lg:mt-line-break text-sm lg:text-base">
+	<div class="titles px-sm-mid lg:px-base text-sm lg:text-base">
 		<div class="col-span-6">
 			{#if formattedArtistList}
 				<p>{formattedArtistList}</p>
@@ -52,6 +52,14 @@
 
 		&:hover {
 			color: var(--color-blue);
+		}
+	}
+
+	.titles {
+		margin-top: var(--spacing-xs);
+
+		@media (min-width: 1024px) {
+			margin-top: calc(var(--spacing-base) - 3px);
 		}
 	}
 </style>

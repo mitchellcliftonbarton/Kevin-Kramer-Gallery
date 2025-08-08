@@ -96,7 +96,7 @@
 		}
 
 		& > * + * {
-			margin-top: var(--spacing-xs);
+			margin-top: 0.6rem;
 		}
 	}
 </style>
