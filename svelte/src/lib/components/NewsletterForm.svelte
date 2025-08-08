@@ -84,7 +84,7 @@
 	};
 </script>
 
-<form class="email-form py-lg lg:py-0" onsubmit={handleSubmit}>
+<form class="email-form" onsubmit={handleSubmit}>
 	{#if title}
 		<p class="text-center lg:hidden">{title}</p>
 	{/if}

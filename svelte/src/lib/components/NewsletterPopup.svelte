@@ -79,9 +79,11 @@
 			flex-direction: column;
 			height: 100%;
 			justify-content: space-between;
+			padding: var(--spacing-lg) 0;
 
 			@media (min-width: 1024px) {
 				margin-top: var(--spacing-lg);
+				padding: 0;
 				height: auto;
 				justify-content: center;
 			}
