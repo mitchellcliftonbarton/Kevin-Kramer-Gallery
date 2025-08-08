@@ -16,7 +16,7 @@ export default {
       name: 'text',
       type: 'array',
       description: 'Text content for this page.',
-      of: RichText,
+      of: [RichText],
     },
   ],
 }

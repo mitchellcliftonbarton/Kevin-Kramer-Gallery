@@ -34,6 +34,12 @@ export const load = async ({ params }) => {
 						...,
 						metadata
 					}
+				},
+				caption_override,
+				poster{
+					asset->{
+						url
+					}
 				}
 			},
 			caption[]

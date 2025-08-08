@@ -42,7 +42,7 @@ export default {
     //   name: 'text_override',
     //   type: 'array',
     //   description: 'If present, this text will override the text of the press item.',
-    //   of: RichText,
+    //   of: [RichText],
     // },
   ],
 }

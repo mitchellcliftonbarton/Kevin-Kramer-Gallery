@@ -1,3 +1,5 @@
+import {Image} from '../utils/fields'
+
 export default {
   name: 'informationPage',
   type: 'document',
@@ -10,8 +12,8 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      ...Image,
       name: 'image',
-      type: 'image',
       title: 'Image',
       description: 'If present, this image will be displayed at the top of the page.',
     },

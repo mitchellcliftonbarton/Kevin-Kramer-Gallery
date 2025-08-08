@@ -31,7 +31,7 @@
 				<figure class="bg-grey-1 relative col-span-2 aspect-[4/3]">
 					<img
 						data-src={image.asset.url}
-						alt=""
+						alt={image.alt}
 						class="lazyload h-full w-full object-cover object-center"
 					/>
 				</figure>

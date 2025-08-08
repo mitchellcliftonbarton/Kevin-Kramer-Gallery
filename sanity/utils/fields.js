@@ -30,77 +30,99 @@ export const Link = {
   },
 }
 
-export const RichText = [
-  {
-    type: 'block',
-    styles: [],
-    marks: {
-      decorators: [
-        {
-          title: 'Small Caps',
-          value: 'smallcaps',
-          icon: SmallCapsIcon,
-          component: SmallCapsDecorator,
-        },
-        {title: 'Strong', value: 'strong'},
-        {title: 'Emphasis', value: 'em'},
-      ],
-      annotations: [
-        {
-          name: 'link',
-          type: 'object',
-          title: 'External link',
-          fields: [
-            {
-              name: 'href',
-              type: 'string',
-              title: 'URL',
-            },
-            {
-              title: 'Open in new tab',
-              name: 'blank',
-              type: 'boolean',
-            },
-          ],
-        },
-      ],
+export const RichText = {
+  type: 'block',
+  styles: [],
+  marks: {
+    decorators: [
+      {
+        title: 'Small Caps',
+        value: 'smallcaps',
+        icon: SmallCapsIcon,
+        component: SmallCapsDecorator,
+      },
+      {title: 'Strong', value: 'strong'},
+      {title: 'Emphasis', value: 'em'},
+    ],
+    annotations: [
+      {
+        name: 'link',
+        type: 'object',
+        title: 'External link',
+        fields: [
+          {
+            name: 'href',
+            type: 'string',
+            title: 'URL',
+          },
+          {
+            title: 'Open in new tab',
+            name: 'blank',
+            type: 'boolean',
+          },
+        ],
+      },
+    ],
+  },
+}
+
+export const Image = {
+  type: 'image',
+  name: 'Image',
+  fields: [
+    {
+      name: 'alt',
+      type: 'string',
+      title: 'Alt text',
+    },
+  ],
+  preview: {
+    select: {
+      asset: 'asset',
+    },
+    prepare({asset}) {
+      return {
+        // title: 'Image',
+        // subtitle: '🖼️',
+        media: asset,
+      }
     },
   },
-]
+}
 
-export const Image = [
-  {
-    type: 'image',
-    name: 'Image',
-    fields: [
-      {
-        name: 'alt',
-        type: 'string',
-        title: 'Alt text',
+export const Video = {
+  type: 'object',
+  name: 'Video',
+  fields: [
+    {
+      name: 'file',
+      type: 'file',
+      title: 'MP4',
+      options: {
+        accept: 'video/mp4',
       },
-      // {
-      //   name: 'is_detail',
-      //   type: 'boolean',
-      //   title: 'Is Detail',
-      //   description: 'If true, the image caption will be adjusted to show .',
-      // }
-    ],
-  },
-]
+    },
+    {
+      name: 'poster',
+      type: 'image',
+      title: 'Poster',
+      description:
+        'The poster image for the video. Acts as a fallback image if the video fails to load.',
+    },
+  ],
+  preview: {
+    select: {
+      // file: 'file',
+      poster: 'poster',
+    },
+    prepare({poster}) {
+      // const filename = file?.asset?._ref?.split('-')?.[1] ?? 'Untitled Video'
 
-export const Video = [
-  {
-    type: 'object',
-    name: 'Video',
-    fields: [
-      {
-        name: 'file',
-        type: 'file',
-        title: 'MP4',
-        options: {
-          accept: 'video/mp4',
-        },
-      },
-    ],
+      return {
+        title: 'Video',
+        subtitle: '►',
+        media: poster?.asset,
+      }
+    },
   },
-]
+}

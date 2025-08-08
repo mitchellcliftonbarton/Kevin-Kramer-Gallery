@@ -31,7 +31,7 @@ export default {
       name: 'alert',
       type: 'array',
       description: 'If present, this text will show an alert text in various parts of the site.',
-      of: RichText,
+      of: [RichText],
     },
     {
       title: 'Address',
@@ -39,7 +39,7 @@ export default {
       type: 'array',
       description:
         'The gallery address. This appears on the information page and footer. In the footer, line breaks will be ignored.',
-      of: RichText,
+      of: [RichText],
     },
     {
       title: 'Hours',
@@ -47,7 +47,7 @@ export default {
       type: 'array',
       description:
         'The gallery hours. This appears on the information page and footer. In the footer, line breaks will be ignored.',
-      of: RichText,
+      of: [RichText],
     },
     {
       title: 'Email',
@@ -60,7 +60,7 @@ export default {
       name: 'contactInformation',
       type: 'array',
       description: 'Phone number, etc.',
-      of: RichText,
+      of: [RichText],
     },
     {
       title: 'Social Links',

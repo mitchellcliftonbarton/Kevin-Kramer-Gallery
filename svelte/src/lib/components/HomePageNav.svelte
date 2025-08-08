@@ -11,8 +11,6 @@
 		// get scroll top
 		let st = window.pageYOffset || window.scrollY;
 
-		console.log('watch', st);
-
 		if (lastScrollTop < trigger) {
 			isHidden = false;
 		} else {

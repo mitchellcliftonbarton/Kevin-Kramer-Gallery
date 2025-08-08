@@ -17,8 +17,11 @@
 		groupIndex,
 		mediaIndex,
 		caption,
-		mediaGroup
+		mediaGroup,
+		caption_override
 	} = media;
+
+	console.log(media);
 
 	// get meta info
 	const isLandscape = $derived(
@@ -50,15 +53,16 @@
 				muted
 				playsinline
 				preload
+				poster={poster?.asset?.url}
 			>
 				<source src={file.asset.url} type="video/mp4" />
 			</video>
 		{/if}
 	</figure>
 
-	{#if caption}
+	{#if caption_override || caption}
 		<div class="text-left text-sm">
-			<Portable value={caption} />
+			<Portable value={caption_override || caption} />
 		</div>
 	{/if}
 </button>

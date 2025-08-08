@@ -18,7 +18,8 @@
 		groupIndex,
 		mediaIndex,
 		caption,
-		mediaGroup
+		mediaGroup,
+		caption_override
 	} = media;
 
 	// get meta info
@@ -49,17 +50,18 @@
 				muted
 				playsinline
 				preload
+				poster={poster?.asset?.url}
 			>
 				<source src={file.asset.url} type="video/mp4" />
 			</video>
 		{/if}
 	</figure>
 
-	{#if caption}
+	{#if caption_override || caption}
 		<div class="px-sm mt-xs lg:mt-sm flex items-start gap-4 text-left text-sm">
 			<p>{indexText}</p>
 
-			<Portable value={caption} />
+			<Portable value={caption_override || caption} />
 		</div>
 	{/if}
 </button>

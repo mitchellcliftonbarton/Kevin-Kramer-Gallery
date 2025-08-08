@@ -5,3 +5,7 @@ export const SmallCapsIcon = () => {
 export const SmallCapsDecorator = (props) => {
   return <span style={{fontVariant: 'small-caps'}}>{props.children}</span>
 }
+
+export const VideoPreview = (props) => {
+  return props?.poster?.asset ?? <div>►</div>
+}

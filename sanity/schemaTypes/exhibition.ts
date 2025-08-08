@@ -1,6 +1,34 @@
 import {RichText, Image, Video} from '../utils/fields'
 import {toPlainText, getMediaPreview} from '../utils/utils'
 
+const ExhibitionImage = {
+  ...Image,
+  fields: [
+    ...Image.fields,
+    {
+      type: 'array',
+      name: 'caption_override',
+      title: 'Caption Override',
+      description: 'A caption override for the media.',
+      of: [RichText],
+    },
+  ],
+}
+
+const ExhibitionVideo = {
+  ...Video,
+  fields: [
+    ...Video.fields,
+    {
+      type: 'array',
+      name: 'caption_override',
+      title: 'Caption Override',
+      description: 'A caption override for the media.',
+      of: [RichText],
+    },
+  ],
+}
+
 export default {
   name: 'exhibition',
   type: 'document',
@@ -48,7 +76,7 @@ export default {
       type: 'array',
       description:
         'Use this field to specify if this exhibition is being held at an alternate location. e.g. "Sadie Coles, London"',
-      of: RichText,
+      of: [RichText],
     },
     {
       title: 'Artists',
@@ -85,17 +113,17 @@ export default {
               name: 'media',
               title: 'Media',
               description: 'The media to display.',
-              of: [...Image, ...Video],
-              options: {
-                layout: 'grid',
-              },
+              of: [ExhibitionImage, ExhibitionVideo],
+              // options: {
+              //   layout: 'grid',
+              // },
             },
             {
               type: 'array',
               name: 'caption',
               title: 'Caption',
               description: 'A caption for the media.',
-              of: RichText,
+              of: [RichText],
             },
             {
               type: 'array',
@@ -128,6 +156,7 @@ export default {
 
               return {
                 title: plainCaption ? plainCaption : '---',
+                subtitle: `${media?.length} media ${media?.length > 1 ? 'items' : 'item'}`,
                 media: mediaPreview,
               }
             },
@@ -140,7 +169,7 @@ export default {
       title: 'Exhibition Text',
       type: 'array',
       description: 'Exhibition text content.',
-      of: RichText,
+      of: [RichText],
     },
     {
       name: 'exhibition_details_override',
@@ -148,7 +177,7 @@ export default {
       type: 'array',
       description:
         'By default, the gallery address and hours will appear under the exhibition text. If present, this field will override it.',
-      of: RichText,
+      of: [RichText],
     },
     {
       title: 'Additional Text Sections',
@@ -172,7 +201,7 @@ export default {
               name: 'text',
               type: 'array',
               description: 'Text content for this section.',
-              of: RichText,
+              of: [RichText],
             },
           ],
         },

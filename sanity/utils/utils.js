@@ -1,3 +1,5 @@
+import {VideoPreview} from './fieldObjects'
+
 export function toPlainText(blocks = []) {
   return (
     blocks
@@ -21,8 +23,7 @@ export function getMediaPreview(media) {
   if (media?._type === 'Image') {
     return media?.asset
   } else if (media?._type === 'Video') {
-    // return media?.file?.asset
-    console.log(media?.file?.asset)
+    return VideoPreview(media)
   }
   return null
 }

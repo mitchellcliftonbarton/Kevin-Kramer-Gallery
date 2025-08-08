@@ -94,7 +94,7 @@
 
 			isTouchDevice = 'ontouchstart' in window;
 
-			console.log('isTouchDevice', isTouchDevice);
+			// console.log('isTouchDevice', isTouchDevice);
 		}
 
 		if (swiperEl) {
@@ -363,6 +363,7 @@
 								loop
 								playsinline
 								class="h-full w-full object-cover object-center"
+								poster={media?.poster?.asset?.url}
 							></video>
 						</figure>
 					</div>

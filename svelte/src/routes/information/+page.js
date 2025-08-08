@@ -8,7 +8,8 @@ export const load = async () => {
 				asset->{
 					...,
 					metadata
-				}
+				},
+				alt
 			},
     }`
 	);
