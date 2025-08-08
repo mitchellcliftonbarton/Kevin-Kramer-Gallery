@@ -21,7 +21,7 @@
 	</button>
 
 	<div
-		class="modal bg-yellow lg:bg-green py-lg px-lg lg:px-xl flex flex-col items-center justify-center"
+		class="modal bg-yellow lg:bg-green lg:py-lg px-lg lg:px-xl flex flex-col items-center justify-center"
 	>
 		<p class="hidden text-center lg:block">Mailing List</p>
 
@@ -64,6 +64,7 @@
 		aspect-ratio: 3/4;
 		z-index: 10;
 		position: relative;
+		height: auto;
 
 		@media (min-width: 1024px) {
 			width: 50%;

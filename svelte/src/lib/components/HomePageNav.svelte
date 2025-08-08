@@ -4,7 +4,7 @@
 
 	let headerElement;
 	let lastScrollTop = $state(0);
-	let trigger = 100;
+	let trigger = 15;
 	let isHidden = $state(false);
 
 	function watch() {
