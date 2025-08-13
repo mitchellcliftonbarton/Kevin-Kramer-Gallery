@@ -12,6 +12,7 @@ export default defineConfig({
 
   projectId: 'ii4ohxov',
   dataset: 'production',
+  studioHost: 'kkg',
 
   plugins: [
     structureTool({
