@@ -1,5 +1,5 @@
 <script>
-	import { PortableText } from '@portabletext/svelte';
+	import Portable from './Portable.svelte';
 	import { formatDate, formatArtistList } from '$lib/utils';
 
 	// define props
@@ -37,6 +37,12 @@
 
 			{#if formattedDate}
 				<p>{formattedDate}</p>
+			{/if}
+
+			{#if alternate_location}
+				<div>
+					<Portable value={alternate_location} />
+				</div>
 			{/if}
 		</div>
 	</div>

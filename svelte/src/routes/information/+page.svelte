@@ -113,12 +113,6 @@
 <style>
 	.other-links {
 		a {
-			/* @media (min-width: 1024px) {
-				&:hover {
-					color: var(--color-blue);
-				}
-			} */
-
 			&:hover {
 				color: var(--color-blue);
 			}
@@ -128,6 +122,12 @@
 	.info {
 		& > * + * {
 			margin-top: var(--spacing-line-break);
+		}
+
+		& > .alert + * {
+			@media (min-width: 1024px) {
+				margin-top: 0;
+			}
 		}
 	}
 
@@ -151,12 +151,6 @@
 		}
 
 		:global(.email-form .submit-container button[type='submit']:not(:disabled)) {
-			/* @media (min-width: 1024px) {
-				&:hover {
-					color: var(--color-blue);
-				}
-			} */
-
 			&:hover {
 				color: var(--color-blue);
 			}

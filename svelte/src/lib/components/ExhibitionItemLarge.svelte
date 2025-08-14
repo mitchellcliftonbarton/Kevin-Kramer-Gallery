@@ -1,19 +1,14 @@
 <script>
 	import Portable from './Portable.svelte';
-	import { formatDate, formatArtistList } from '$lib/utils';
+	import { formatExhibitionTitle } from '$lib/utils';
 
 	// define props
 	let { exhibition, typeTitle = 'Exhibition' } = $props();
 
 	// destructure exhibition
-	const { alternate_location, start_date, end_date, artists, featured_image, title } = exhibition;
+	const { featured_image, title } = exhibition;
 
-	const formattedDate = formatDate({
-		startDate: start_date,
-		endDate: end_date
-	});
-
-	const formattedArtistList = formatArtistList(artists);
+	const formattedExhibitionTitle = formatExhibitionTitle(exhibition);
 </script>
 
 <a href={`/exhibitions/${exhibition.slug.current}`} class="exhibition-item-large block">
@@ -23,28 +18,8 @@
 				<p>{typeTitle}</p>
 			{/if}
 
-			{#if alternate_location}
-				<div class="hidden lg:block">
-					<Portable value={alternate_location} />
-				</div>
-			{/if}
-		</div>
-
-		<div class="col-span-12 lg:col-span-6">
-			{#if formattedArtistList}
-				<p>{formattedArtistList}</p>
-			{/if}
-
-			<p class="italic">{title}</p>
-
-			{#if formattedDate}
-				<p>{formattedDate}</p>
-			{/if}
-
-			{#if alternate_location}
-				<div class="block lg:hidden">
-					<Portable value={alternate_location} />
-				</div>
+			{#if formattedExhibitionTitle}
+				<div>{@html formattedExhibitionTitle}</div>
 			{/if}
 		</div>
 	</div>

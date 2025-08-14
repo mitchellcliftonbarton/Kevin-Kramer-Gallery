@@ -68,6 +68,9 @@
 		artists
 	} = data?.exhibition;
 
+	// get alert
+	const { alert } = data?.siteSettings;
+
 	// check if exhibition is current
 	const isCurrent = isWithinInterval(new Date(), {
 		start: new Date(start_date),
@@ -296,6 +299,12 @@
 									<Portable value={alternate_location} />
 								{:else}
 									<p>On view at {toPlainText(addressNoBreaks)}<br />{toPlainText(hoursNoBreaks)}</p>
+								{/if}
+
+								{#if alert}
+									<div class="alert text-green rich-text">
+										<Portable value={alert} />
+									</div>
 								{/if}
 							</div>
 						{:else if alternate_location}
