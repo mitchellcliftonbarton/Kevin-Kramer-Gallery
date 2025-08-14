@@ -1,5 +1,3 @@
-import {RichText} from '../utils/fields'
-
 export default {
   name: 'press',
   type: 'document',
@@ -17,6 +15,15 @@ export default {
       name: 'link',
       type: 'url',
       description: 'The link to the press item. Will open in a new tab.',
+    },
+    {
+      name: 'pdf',
+      type: 'file',
+      title: 'PDF',
+      description: 'An optional PDF for the press item. Will override the link if present.',
+      options: {
+        accept: 'application/pdf',
+      },
     },
     {
       name: 'source',
@@ -37,12 +44,5 @@ export default {
       title: 'Author',
       desciption: 'The author of the article. e.g. "Calvin Tompkins"',
     },
-    // {
-    //   title: 'Text Override',
-    //   name: 'text_override',
-    //   type: 'array',
-    //   description: 'If present, this text will override the text of the press item.',
-    //   of: [RichText],
-    // },
   ],
 }

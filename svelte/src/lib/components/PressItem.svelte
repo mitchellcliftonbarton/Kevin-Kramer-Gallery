@@ -4,13 +4,20 @@
 	import { format } from 'date-fns';
 	let { press } = $props();
 
-	const { article_title, author, source, date, link } = press;
+	const { article_title, author, source, date, link, pdf } = press;
 
 	// check if article_title has a “ at beginning or ” at end. If it does, remove both
 	let articleTitle = $derived(article_title?.replace(/^“/, '').replace(/”$/, ''));
+
+	// link
+	let linkValue = $derived(pdf ? pdf?.asset?.url : link);
 </script>
 
-<svelte:element this={link ? 'a' : 'div'} href={link} target={link ? '_blank' : null}>
+<svelte:element
+	this={linkValue ? 'a' : 'div'}
+	href={linkValue}
+	target={linkValue ? '_blank' : null}
+>
 	{#if article_title}
 		<p class="title">{article_title}”</p>
 	{/if}

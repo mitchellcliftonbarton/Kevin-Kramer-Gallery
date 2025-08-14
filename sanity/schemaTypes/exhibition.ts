@@ -38,13 +38,14 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
-      desciption: 'The title of the exhibition',
+      description: 'The title of the exhibition',
       validation: (Rule: any) => Rule.required(),
     },
     {
       title: 'Slug',
       name: 'slug',
       type: 'slug',
+      description: 'A required slug for the exhibition. Used to generate the exhibition page URL.',
       validation: (Rule: any) => Rule.required(),
       options: {
         source: 'title',
@@ -67,8 +68,7 @@ export default {
       name: 'featured_image',
       type: 'image',
       title: 'Featured Image',
-      description:
-        'The image that will be referenced when displaying the exhibition on the home page.',
+      description: 'The image that will be referenced when displaying the exhibition other pages.',
     },
     {
       title: 'Alternate Location',
@@ -96,7 +96,8 @@ export default {
       title: 'Solo Show',
       name: 'is_solo',
       type: 'boolean',
-      description: 'If true, the exhibition is a solo show.',
+      description:
+        'If true, the exhibition is a solo show. This will attribute all exhibition media to the list of artists present.',
     },
     {
       title: 'Exhibition Media',
@@ -112,17 +113,14 @@ export default {
               type: 'array',
               name: 'media',
               title: 'Media',
-              description: 'The media to display.',
+              description: 'The media to display. Options for image and video.',
               of: [ExhibitionImage, ExhibitionVideo],
-              // options: {
-              //   layout: 'grid',
-              // },
             },
             {
               type: 'array',
               name: 'caption',
               title: 'Caption',
-              description: 'A caption for the media.',
+              description: 'An optional caption for the media.',
               of: [RichText],
             },
             {

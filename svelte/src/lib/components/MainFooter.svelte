@@ -41,7 +41,7 @@
 		{#if email}
 			<CopyButton
 				textToCopy={email}
-				buttonText="Email"
+				buttonText={email}
 				className="text-blue lg:hover:opacity-50 transition-opacity duration-300"
 			/>
 		{/if}

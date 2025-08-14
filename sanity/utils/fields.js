@@ -56,7 +56,18 @@ export const RichText = {
             title: 'URL',
           },
           {
+            name: 'pdf',
+            type: 'file',
+            title: 'PDF',
+            description: 'An optional PDF to link to. Will override the link if present.',
+            options: {
+              accept: 'application/pdf',
+            },
+          },
+          {
             title: 'Open in new tab',
+            description:
+              'If pdf is present, the value of this field will be ignored and the PDF will open in a new tab.',
             name: 'blank',
             type: 'boolean',
           },

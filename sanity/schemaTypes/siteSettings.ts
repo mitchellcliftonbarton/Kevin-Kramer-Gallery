@@ -9,7 +9,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
-      desciption: 'The title of the site',
+      description: 'The title of the site',
       validation: (Rule: any) => Rule.required(),
     },
     {

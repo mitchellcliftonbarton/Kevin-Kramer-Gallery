@@ -13,8 +13,7 @@ export default {
       title: 'Featured Press',
       name: 'featured_press',
       type: 'array',
-      description:
-        'Press to be featured on the home page. If empty, the most recent 3 press items will be displayed.',
+      description: 'Press to be featured on the home page. If empty, no press will be displayed.',
       of: [{type: 'reference', to: [{type: 'press'}]}],
       options: {
         layout: 'list',

@@ -25,7 +25,15 @@ export const load = async () => {
 	const homeData = await client.fetch(
 		`{
 			"homePage": *[_type == "homePage"][0]{
-				featured_press[]->
+				featured_press[]->{
+					...,
+					pdf{
+						asset->{
+							...,
+							metadata
+						}
+					}
+				}
 			},
 			"currentExhibitions": *[_type == "exhibition" && start_date <= now() && end_date >= now()] | order(start_date desc) ${exhibitionProjection},
 			"upcomingExhibitions": *[_type == "exhibition" && start_date > now()] | order(start_date asc) ${exhibitionProjection},

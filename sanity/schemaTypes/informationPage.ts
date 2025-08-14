@@ -15,13 +15,13 @@ export default {
       ...Image,
       name: 'image',
       title: 'Image',
-      description: 'If present, this image will be displayed at the top of the page.',
+      description: 'If present, this image will be displayed at the top of the information page.',
     },
     {
       name: 'newsletter_title',
       type: 'string',
       title: 'Newsletter Title',
-      desciption: 'The title above the newsletter',
+      description: 'The title above the newsletter signup form.',
     },
   ],
 }

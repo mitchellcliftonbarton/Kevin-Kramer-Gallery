@@ -58,7 +58,7 @@
 
 				<div class="rich-text">
 					{#if email}
-						<CopyButton textToCopy={email} buttonText="Email" className="lg:hover:text-blue" />
+						<CopyButton textToCopy={email} buttonText={email} className="lg:hover:text-blue" />
 					{/if}
 
 					{#if contactInformation}

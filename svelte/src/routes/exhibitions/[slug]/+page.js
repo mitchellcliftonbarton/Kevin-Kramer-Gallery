@@ -11,11 +11,48 @@ export const load = async ({ params }) => {
 		},
 		start_date,
 		end_date,
-		press[]->,
-		exhibition_text,
+		press[]->{
+			...,
+			pdf{
+				asset->{
+					...,
+					metadata
+				}
+			}
+		},
+		exhibition_text[]{
+			...,
+			markDefs[]{
+				...,
+				_type == "link" => {
+					...,
+					pdf{
+						asset->{
+							url
+						}
+					}
+				}
+			}
+		},
 		alternate_location,
 		exhibition_details_override,
-		additional_text_sections[],
+		additional_text_sections[]{
+			...,
+			text[]{
+				...,
+				markDefs[]{
+					...,
+					_type == "link" => {
+						...,
+						pdf{
+							asset->{
+								url
+							}
+						}
+					}
+				}
+			}
+		},
 		featured_image{
 			asset->{
 				url
