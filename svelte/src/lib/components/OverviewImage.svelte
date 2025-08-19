@@ -21,7 +21,7 @@
 		caption_override
 	} = media;
 
-	console.log(media);
+	// console.log(media);
 
 	// get meta info
 	const isLandscape = $derived(

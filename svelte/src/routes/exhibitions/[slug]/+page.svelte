@@ -210,7 +210,7 @@
 			const touch = e.touches[0];
 			startX = touch.clientX;
 			startY = touch.clientY;
-			console.log('starting touch');
+			// console.log('starting touch');
 		}
 	}
 
@@ -225,9 +225,9 @@
 			if (Math.abs(deltaX) <= threshold && Math.abs(deltaY) <= threshold) {
 				e.preventDefault();
 				carouselActive = false;
-				console.log('ended touch, closing carousel');
+				// console.log('ended touch, closing carousel');
 			} else {
-				console.log('ended touch, not closing carousel');
+				// console.log('ended touch, not closing carousel');
 			}
 		}
 	}

@@ -8,6 +8,11 @@
 	import NProgress from 'nprogress';
 	import 'nprogress/nprogress.css';
 	import { globalState } from '$lib/state/state.svelte';
+	import { loadGoogleAnalytics } from '$lib/utils';
+	import { onMount } from 'svelte';
+
+	// google analytics tracking id
+	const GA_TRACKING_ID = 'G-8K1F5QQEWD';
 
 	// get current path
 	let currentPath = $derived(page.url.pathname);
@@ -29,6 +34,11 @@
 		import('lazysizes');
 	}
 
+	// onMount
+	onMount(() => {
+		loadGoogleAnalytics(GA_TRACKING_ID);
+	});
+
 	// handle navigation
 	beforeNavigate(() => {
 		// start nprogress
@@ -49,6 +59,14 @@
 
 		// remove loading class
 		document.body.classList.remove('loading');
+
+		// send page view to google analytics
+		if (typeof window !== 'undefined' && window.gtag) {
+			window.gtag('event', 'page_view', {
+				page_path: window.location.pathname,
+				page_title: document.title
+			});
+		}
 	});
 </script>
 
