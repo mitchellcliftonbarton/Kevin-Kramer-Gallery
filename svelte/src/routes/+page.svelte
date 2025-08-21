@@ -29,7 +29,7 @@
 
 <div class="home pt-mobile-push lg:pt-xxl">
 	{#if alert}
-		<section class="alert text-green rich-text px-sm-mid lg:px-lg col-span-2">
+		<section class="alert text-green rich-text px-base-mid lg:px-lg col-span-2">
 			<Portable value={alert} />
 		</section>
 	{/if}
@@ -60,13 +60,23 @@
 		</section>
 	{/if}
 
-	<PastExhibitions {pastExhibitions} />
+	{#if pastExhibitions.length > 0}
+		<PastExhibitions {pastExhibitions} />
+	{/if}
 </div>
 
 <style>
 	.home {
 		:global(& > section + section) {
 			margin-top: var(--spacing-xl-minus);
+
+			@media (min-width: 1024px) {
+				margin-top: var(--spacing-xl);
+			}
+		}
+
+		:global(& > .alert + section) {
+			margin-top: 5rem;
 
 			@media (min-width: 1024px) {
 				margin-top: var(--spacing-xl);

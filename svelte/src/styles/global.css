@@ -103,6 +103,10 @@ body {
 	}
 }
 
+main {
+	min-height: calc(100svh - 245px);
+}
+
 input {
 	outline: none;
 	border: none;
