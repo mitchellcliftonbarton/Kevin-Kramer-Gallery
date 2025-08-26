@@ -10,5 +10,10 @@
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
+	},
+	"vars": {
+		"MAILCHIMP_API_SERVER": "",
+		"MAILCHIMP_AUDIENCE_ID": "",
+		"MAILCHIMP_API_KEY": ""
 	}
 }
