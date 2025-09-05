@@ -12,8 +12,8 @@
 		"directory": ".svelte-kit/cloudflare"
 	},
 	"vars": {
-		"MAILCHIMP_API_SERVER": "us10",
-		"MAILCHIMP_AUDIENCE_ID": "8571f93a0f",
-		"MAILCHIMP_API_KEY": "369ec30c53a545896c3d442ffb566750-us10"
+		"MAILCHIMP_API_SERVER": "",
+		"MAILCHIMP_AUDIENCE_ID": "",
+		"MAILCHIMP_API_KEY": ""
 	}
 }
