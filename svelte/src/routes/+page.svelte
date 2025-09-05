@@ -27,76 +27,15 @@
 	<meta property="og:title" content="Kevin Kramer Gallery" />
 </svelte:head>
 
-<div class="home pt-mobile-push lg:pt-xxl">
-	{#if alert}
-		<section class="alert text-green rich-text px-base-mid lg:px-lg col-span-2">
-			<Portable value={alert} />
-		</section>
-	{/if}
+<div class="px-md flex h-[100svh] items-center justify-center">
+	<p class="text-blue hidden text-center lg:block">Kevin Kramer Gallery will open this fall</p>
+	<p class="text-blue text-center lg:hidden">Kevin Kramer Gallery<br />will open this fall</p>
 
-	{#if currentExhibitions.length > 0 || upcomingExhibitions.length > 0}
-		<section class="current-upcoming-exhibitions px-sm-mid lg:px-base">
-			{#each currentExhibitions as exhibition}
-				<ExhibitionItemLarge {exhibition} typeTitle="On View" />
-			{/each}
-
-			{#each upcomingExhibitions as exhibition}
-				<ExhibitionItemLarge {exhibition} typeTitle="Upcoming" />
-			{/each}
-		</section>
-	{/if}
-
-	{#if featured_press?.length > 0}
-		<section class="press px-base-mid lg:px-lg">
-			<div class="max-w-def-max mx-auto">
-				<h2 class="text-center">Recent Press</h2>
-
-				<div class="press-items mt-line-break">
-					{#each featured_press as press}
-						<PressItem {press} />
-					{/each}
-				</div>
-			</div>
-		</section>
-	{/if}
-
-	{#if pastExhibitions.length > 0}
-		<PastExhibitions {pastExhibitions} />
-	{/if}
+	<div class="p-md absolute bottom-0 left-0 w-full">
+		<p class="text-blue hidden lg:block">121 West 27th Street #702, New York, NY 10001</p>
+		<p class="text-blue lg:hidden">121 West 27th Street #702<br />New York, NY 10001</p>
+	</div>
 </div>
 
 <style>
-	.home {
-		:global(& > section + section) {
-			margin-top: var(--spacing-xl-minus);
-
-			@media (min-width: 1024px) {
-				margin-top: var(--spacing-xl);
-			}
-		}
-
-		:global(& > .alert + section) {
-			margin-top: 5rem;
-
-			@media (min-width: 1024px) {
-				margin-top: var(--spacing-xl);
-			}
-		}
-	}
-
-	.current-upcoming-exhibitions :global(> * + *) {
-		margin-top: var(--spacing-lg-mid);
-
-		@media (min-width: 1024px) {
-			margin-top: var(--spacing-lg);
-		}
-	}
-
-	.press {
-		.press-items {
-			:global(& > * + *) {
-				margin-top: var(--spacing-line-break);
-			}
-		}
-	}
 </style>

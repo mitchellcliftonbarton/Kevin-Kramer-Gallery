@@ -81,19 +81,7 @@
 </svelte:head>
 
 <div id="app" class={`${globalState.newsletterPopupActive ? 'newsletter-popup-active' : ''}`}>
-	<MainNav />
-
 	<main>
 		{@render children()}
 	</main>
-
-	{#if currentPath === '/'}
-		<MainFooter />
-	{:else if currentPath.includes('/exhibitions/')}
-		<footer class="p-lg flex items-center justify-center">
-			<a href="/" class="text-blue">Kevin Kramer Gallery</a>
-		</footer>
-	{/if}
-
-	<NewsletterPopup />
 </div>
