@@ -29,7 +29,7 @@
 
 <div class="px-md flex h-[100svh] items-center justify-center">
 	<p class="text-blue hidden text-center lg:block">Kevin Kramer Gallery will open this fall</p>
-	<p class="text-blue text-center lg:hidden">Kevin Kramer Gallery<br />will open this fall</p>
+	<p class="text-blue hello text-center lg:hidden">Kevin Kramer Gallery<br />will open this fall</p>
 
 	<div class="p-md absolute bottom-0 left-0 w-full">
 		<p class="text-blue hidden lg:block">121 West 27th Street #702, New York, NY 10001</p>
