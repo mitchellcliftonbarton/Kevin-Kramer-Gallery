@@ -1,6 +1,7 @@
 <script>
 	import Portable from './Portable.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import Image from './Image.svelte';
 
 	// props
 	let { media, slideIndex, setCarouselSlide } = $props();
@@ -42,7 +43,7 @@
 >
 	<figure class="bg-grey-1">
 		{#if _type === 'Image' && asset?.url}
-			<img data-src={asset.url} {alt} class="lazyload h-full w-full object-cover object-center" />
+			<Image imageUrl={asset.url} {alt} classes="h-full w-full object-cover object-center" />
 		{:else if _type === 'Video' && file?.asset?.url}
 			<video
 				class="lazyload h-full w-full object-cover object-center"

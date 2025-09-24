@@ -1,6 +1,7 @@
 <script>
 	import { formatExhibitionTitle } from '$lib/utils';
 	import { onMount } from 'svelte';
+	import { urlFor } from '$lib/sanity/client';
 
 	// props
 	let { pastExhibitions } = $props();
@@ -12,7 +13,7 @@
 	// functions
 	function handleMouseEnter(exhibition) {
 		if (isLargeQuery) {
-			currentImage = exhibition?.featured_image?.asset?.url;
+			currentImage = urlFor(exhibition?.featured_image?.asset?.url).width(500).url();
 		}
 	}
 

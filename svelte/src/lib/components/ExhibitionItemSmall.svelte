@@ -1,6 +1,7 @@
 <script>
 	import Portable from './Portable.svelte';
 	import { formatDate, formatArtistList } from '$lib/utils';
+	import Image from './Image.svelte';
 
 	// define props
 	let { exhibition } = $props();
@@ -19,10 +20,10 @@
 <a href={`/exhibitions/${exhibition.slug.current}`} class="block">
 	{#if featured_image?.asset?.url}
 		<figure class="bg-grey-1 aspect-[4/3]">
-			<img
-				data-src={featured_image.asset.url}
+			<Image
+				imageUrl={featured_image.asset.url}
 				alt={exhibition.title}
-				class="lazyload h-full w-full object-cover object-center"
+				classes="h-full w-full object-cover object-center"
 			/>
 		</figure>
 	{/if}

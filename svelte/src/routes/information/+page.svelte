@@ -2,6 +2,7 @@
 	import Portable from '$lib/components/Portable.svelte';
 	import CopyButton from '$lib/components/CopyButton.svelte';
 	import NewsletterForm from '$lib/components/NewsletterForm.svelte';
+	import Image from '$lib/components/Image.svelte';
 
 	// define props
 	let { data } = $props();
@@ -29,10 +30,10 @@
 
 			{#if image}
 				<figure class="bg-grey-1 relative col-span-2 aspect-[4/3]">
-					<img
-						data-src={image.asset.url}
+					<Image
+						imageUrl={image.asset.url}
 						alt={image.alt}
-						class="lazyload h-full w-full object-cover object-center"
+						classes="h-full w-full object-cover object-center"
 					/>
 				</figure>
 			{/if}

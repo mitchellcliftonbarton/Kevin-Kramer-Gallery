@@ -4,6 +4,7 @@
 	import TextSection from '$lib/components/TextSection.svelte';
 	import ImagesScroll from '$lib/components/ImagesScroll.svelte';
 	import ImagesOverview from '$lib/components/ImagesOverview.svelte';
+	import Image from '$lib/components/Image.svelte';
 	import { isWithinInterval } from 'date-fns';
 	import { page } from '$app/state';
 	import {
@@ -80,6 +81,15 @@
 	// generate new exhibition_media array that flattens the array with group information
 	const flattenedExhibitionMedia = $derived(
 		exhibition_media ? flattenExhibitionMedia(exhibition_media) : []
+	);
+
+	const exhibitionMediaLimited = $derived(
+		flattenedExhibitionMedia
+			.map((media, index) => ({
+				...media,
+				slideIndex: index
+			}))
+			.filter((media) => media.mediaIndex === 0)
 	);
 
 	// formatted date
@@ -273,8 +283,8 @@
 
 <div class="exhibition-content">
 	{#if isImagesView && !isScrollLayout}
-		{#if flattenedExhibitionMedia}
-			<ImagesOverview media={flattenedExhibitionMedia} {setCarouselSlide} />
+		{#if exhibitionMediaLimited}
+			<ImagesOverview media={exhibitionMediaLimited} {setCarouselSlide} />
 		{/if}
 	{:else if isImagesView && isScrollLayout}
 		{#if flattenedExhibitionMedia}
@@ -354,17 +364,17 @@
 					<div
 						class={`swiper-slide relative ${media?.asset?.metadata?.dimensions?.aspectRatio > 1 ? 'landscape' : 'portrait'}`}
 					>
-						<figure>
-							<img
-								data-src={media?.asset?.url}
+						<figure class="bg-grey-1">
+							<Image
+								imageUrl={media?.asset?.url}
 								alt={media?.alt}
-								class="lazyload h-full w-full object-cover object-center"
+								classes="h-full w-full object-cover object-center"
 							/>
 						</figure>
 					</div>
 				{:else if media?._type === 'Video'}
 					<div class="swiper-slide video relative">
-						<figure>
+						<figure class="bg-grey-1">
 							<video
 								src={media?.file?.asset?.url}
 								autoplay

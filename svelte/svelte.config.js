@@ -1,14 +1,9 @@
-import adapter from '@sveltejs/adapter-cloudflare';
+import adapter from '@sveltejs/adapter-auto';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter({
-			// This ensures environment variables work in both dev and production
-			platformProxy: {
-				enabled: true
-			}
-		})
+		adapter: adapter()
 	}
 };
 
