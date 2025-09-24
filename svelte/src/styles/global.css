@@ -78,8 +78,11 @@ html {
 	color: var(--color-black);
 	background: var(--color-white);
 	font-variant-numeric: oldstyle-nums;
-	overscroll-behavior-y: none;
 	-webkit-font-smoothing: antialiased;
+
+	@media (min-width: 1024px) {
+		overscroll-behavior-y: none;
+	}
 }
 
 body {
@@ -87,10 +90,10 @@ body {
 	font-family: var(--font-primary);
 	font-weight: 400;
 	line-height: var(--text-base--line-height);
-	overscroll-behavior-y: none;
 
 	@media (min-width: 1024px) {
 		font-size: var(--text-base);
+		overscroll-behavior-y: none;
 	}
 
 	#nprogress .bar {
