@@ -67,6 +67,12 @@
 				page_title: document.title
 			});
 		}
+
+		// check what the window scrollY is
+		// if it's greater than 0, scroll to the top
+		if (window.scrollY > 0) {
+			window.scrollTo(0, 0);
+		}
 	});
 </script>
 
