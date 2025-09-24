@@ -367,6 +367,7 @@
 						<figure class="bg-grey-1">
 							<Image
 								imageUrl={media?.asset?.url}
+								preload={true}
 								alt={media?.alt}
 								classes="h-full w-full object-cover object-center"
 							/>
