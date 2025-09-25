@@ -67,7 +67,9 @@
 					{/if}
 
 					{#each socialLinks as link}
-						<a href={link.href} target={link.blank ? '_blank' : '_self'}>{link.linkText}</a>
+						<p>
+							<a href={link.href} target={link.blank ? '_blank' : '_self'}>{link.linkText}</a>
+						</p>
 					{/each}
 				</div>
 			</div>

@@ -11,11 +11,14 @@
 
 	onMount(() => {
 		if (preload) {
-			const img = new Image();
-			img.src = src;
-			img.onload = () => {
-				preloadSrc = src;
-			};
+			// Use Promise.resolve().then() to defer preloading until after the current execution stack
+			Promise.resolve().then(() => {
+				const img = new Image();
+				img.src = src;
+				img.onload = () => {
+					preloadSrc = src;
+				};
+			});
 		}
 	});
 </script>
