@@ -12,7 +12,7 @@
 
 	// replace newlines in spans
 	let addressNoBreaks = replaceNewlinesInSpans(address);
-	// let hoursNoBreaks = replaceNewlinesInSpans(hours);
+	let hoursNoBreaks = replaceNewlinesInSpans(hours);
 
 	const openNewsletterPopup = () => {
 		document.body.style.overflow = 'hidden';
@@ -21,9 +21,9 @@
 </script>
 
 <footer
-	class="px-base-mid lg:px-lg pb-base-mid lg:pb-lg gap-base lg:gap-base mt-xxl lg:mt-xxxl grid grid-cols-12"
+	class="px-base-mid lg:px-lg pb-base-mid lg:pb-lg gap-base mt-xxl lg:mt-xxxl grid grid-cols-12"
 >
-	<div class="text-sm-plus col-span-12 text-base lg:col-span-6">
+	<div class="text-sm-plus col-span-12 lg:col-span-6 lg:text-base">
 		{#if address}
 			<div class="rich-text text-blue links-fade hidden lg:block">
 				<Portable value={addressNoBreaks} />
@@ -35,8 +35,12 @@
 		{/if}
 
 		{#if hours}
-			<div class="rich-text text-blue links-fade">
+			<div class="rich-text text-blue links-fade mt-base lg:hidden">
 				<Portable value={hours} />
+			</div>
+
+			<div class="rich-text text-blue links-fade hidden lg:block">
+				<Portable value={hoursNoBreaks} />
 			</div>
 		{/if}
 	</div>
