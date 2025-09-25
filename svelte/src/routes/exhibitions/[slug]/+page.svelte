@@ -262,7 +262,7 @@
 	{/if}
 </svelte:head>
 
-<div class="mobile-title px-base-mid pt-base-mid lg:hidden">
+<div class="mobile-title px-base-mid pt-base-mid flex flex-col items-start lg:hidden">
 	<a href="/">
 		{#if formattedArtistList}
 			<p>{formattedArtistList}</p>
