@@ -50,8 +50,17 @@
 	// destructure site settings
 	const { address, hours } = siteSettings;
 
+	const createShortAddress = (address) => {
+		const plainAddress = toPlainText(replaceNewlinesInSpans(address));
+
+		// now remove everything after 'New York' in the string
+		const shortAddress = plainAddress.split('New York')[0] + 'New York';
+
+		return shortAddress;
+	};
+
 	// replace newlines in spans
-	let addressNoBreaks = replaceNewlinesInSpans(address);
+	let addressNoBreaks = createShortAddress(address);
 	let hoursNoBreaks = replaceNewlinesInSpans(hours);
 
 	// get exhibition data
@@ -308,7 +317,7 @@
 								{#if alternate_location}
 									<Portable value={alternate_location} />
 								{:else}
-									<p>On view at {toPlainText(addressNoBreaks)}<br />{toPlainText(hoursNoBreaks)}</p>
+									<p>On view at {addressNoBreaks}<br />{toPlainText(hoursNoBreaks)}</p>
 								{/if}
 
 								{#if alert}

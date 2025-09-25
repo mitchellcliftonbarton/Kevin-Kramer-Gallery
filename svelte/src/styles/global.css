@@ -142,6 +142,10 @@ button {
 		}
 	}
 
+	strong {
+		font-weight: normal;
+	}
+
 	&.links-fade {
 		a {
 			transition: opacity 0.3s;

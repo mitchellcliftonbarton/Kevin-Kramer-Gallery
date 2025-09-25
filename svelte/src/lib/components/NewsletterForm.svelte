@@ -27,6 +27,11 @@
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		// send event to google analytics
+		if (typeof window !== 'undefined' && window.gtag) {
+			window.gtag('event', 'subscribe_to_newsletter_submitted');
+		}
+
 		// check to make sure all fields are filled
 		if (!allFieldsFilled) {
 			alert('Please fill in all fields');
@@ -65,11 +70,17 @@
 			buttonText = 'Subscribed';
 			submitted = true;
 
-			// setTimeout(() => {
-			// 	buttonText = 'Subscribe';
-			// }, 1200);
+			// send event to google analytics
+			if (typeof window !== 'undefined' && window.gtag) {
+				window.gtag('event', 'subscribe_to_newsletter_success');
+			}
 		} else {
 			console.error(subscribeConfirm.data);
+
+			// send event to google analytics
+			if (typeof window !== 'undefined' && window.gtag) {
+				window.gtag('event', 'subscribe_to_newsletter_error');
+			}
 
 			alert('There was an error subscribing to the newsletter.');
 

@@ -12,7 +12,7 @@
 
 	// replace newlines in spans
 	let addressNoBreaks = replaceNewlinesInSpans(address);
-	let hoursNoBreaks = replaceNewlinesInSpans(hours);
+	// let hoursNoBreaks = replaceNewlinesInSpans(hours);
 
 	const openNewsletterPopup = () => {
 		document.body.style.overflow = 'hidden';
@@ -36,7 +36,7 @@
 
 		{#if hours}
 			<div class="rich-text text-blue links-fade">
-				<Portable value={hoursNoBreaks} />
+				<Portable value={hours} />
 			</div>
 		{/if}
 	</div>
