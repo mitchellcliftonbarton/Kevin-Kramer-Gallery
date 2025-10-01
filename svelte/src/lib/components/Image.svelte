@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	// define props
-	let { imageUrl, alt, classes, width = 2200, preload = false } = $props();
+	let { imageUrl, alt, classes, width = 2600, preload = false } = $props();
 
 	// get src
 	const src = urlFor(imageUrl).width(width).url();
