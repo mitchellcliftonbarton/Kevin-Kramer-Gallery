@@ -34,7 +34,7 @@
 		<PastExhibitionsList {pastExhibitions} />
 
 		<div
-			class="past-exhibitions-grid gap-sm-mid lg:gap-base mt-base-mid lg:mt-line-break grid grid-cols-2"
+			class={`past-exhibitions-grid gap-sm-mid lg:gap-base mt-base-mid lg:mt-line-break grid ${pastExhibitions.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}
 		>
 			{#each pastExhibitions as exhibition}
 				<ExhibitionItemSmall {exhibition} />
