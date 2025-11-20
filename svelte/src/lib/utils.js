@@ -95,15 +95,21 @@ export function formatArtistList(artists) {
 
 // flatten exhibition media
 export function flattenExhibitionMedia(media) {
-	return media.flatMap((mediaGroup, groupIndex) =>
-		mediaGroup.media.map((media, mediaIndex) => ({
+	return media.flatMap((mediaGroup, groupIndex) => {
+		// Handle cases where mediaGroup.media might be null or not an array
+		if (!mediaGroup.media || !Array.isArray(mediaGroup.media)) {
+			return [];
+		}
+
+		// if media is not null, return the media
+		return mediaGroup.media.map((media, mediaIndex) => ({
 			...media,
 			groupIndex,
 			mediaIndex,
 			mediaGroup,
 			caption: mediaGroup.caption
-		}))
-	);
+		}));
+	});
 }
 
 export function formatExhibitionTitle(exhibition) {

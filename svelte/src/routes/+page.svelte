@@ -41,7 +41,7 @@
 			{/each}
 
 			{#each upcomingExhibitions as exhibition}
-				<ExhibitionItemLarge {exhibition} typeTitle="Upcoming" />
+				<ExhibitionItemLarge {exhibition} typeTitle="Upcoming" isLink={false} />
 			{/each}
 		</section>
 	{/if}

@@ -5,7 +5,7 @@
 	import Image from './Image.svelte';
 
 	// define props
-	let { exhibition, typeTitle = 'Exhibition' } = $props();
+	let { exhibition, typeTitle = 'Exhibition', isLink = true } = $props();
 
 	// destructure exhibition
 	const { featured_image, title, start_date, end_date, alternate_location } = exhibition;
@@ -20,7 +20,11 @@
 	});
 </script>
 
-<a href={`/exhibitions/${exhibition.slug.current}`} class="exhibition-item-large block">
+<svelte:element
+	this={isLink ? 'a' : 'div'}
+	href={`/exhibitions/${exhibition.slug.current}`}
+	class="exhibition-item-large block"
+>
 	<div class="titles px-sm-mid lg:px-base gap-base-mid lg:gap-base grid grid-cols-12">
 		<div class="col-span-12 lg:col-span-6">
 			{#if typeTitle}
@@ -56,7 +60,7 @@
 			/>
 		</figure>
 	{/if}
-</a>
+</svelte:element>
 
 <style>
 	.exhibition-item-large {
