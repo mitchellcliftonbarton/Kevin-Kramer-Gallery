@@ -26,7 +26,7 @@
 	class="exhibition-item-large block"
 >
 	<div class="titles px-sm-mid lg:px-base gap-base-mid lg:gap-base grid grid-cols-12">
-		<div class="col-span-12 lg:col-span-6">
+		<div class="col-span-12">
 			{#if typeTitle}
 				<p>{typeTitle}</p>
 			{/if}
