@@ -304,9 +304,11 @@
 			<div class="max-w-def-max container mx-auto">
 				{#if exhibition_text || isCurrent || exhibition_details_override}
 					<section class="exhibition-text">
-						<div class="rich-text">
-							<Portable value={exhibition_text} />
-						</div>
+						{#if exhibition_text}
+							<div class="rich-text">
+								<Portable value={exhibition_text} />
+							</div>
+						{/if}
 
 						{#if exhibition_details_override}
 							<div class="rich-text text-sm">

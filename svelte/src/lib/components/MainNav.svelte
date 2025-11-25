@@ -28,7 +28,7 @@
 	<header
 		class={`fixed top-0 left-0 w-full ${isExhibitionDetailPage ? 'px-base-mid lg:px-md py-base-mid lg:py-md-minus' : 'px-base-mid lg:px-lg py-base-mid lg:py-lg-minus'}`}
 	>
-		<nav class="flex justify-between">
+		<nav class="flex items-start justify-between">
 			{#if isLegalPage}
 				<ul class="flex flex-col items-start gap-[0.2em] lg:flex-row lg:items-center">
 					<li>

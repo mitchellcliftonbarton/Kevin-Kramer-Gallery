@@ -41,12 +41,14 @@
 
 {#if !isImagesView}
 	{#if totalImages > 0}
-		<a href={`${page.url.pathname}?view=images&layout=scroll`} class="text-blue"
-			>Images ({totalImages})</a
-		>
+		<div class="flex flex-none items-start justify-end lg:w-1/3">
+			<a href={`${page.url.pathname}?view=images&layout=scroll`} class="text-blue"
+				>Images ({totalImages})</a
+			>
+		</div>
 	{/if}
 {:else}
-	<div class="flex flex-none items-start justify-between lg:w-1/3 lg:items-center">
+	<div class="flex flex-none items-start justify-between lg:w-1/3">
 		<div class="hidden lg:block">
 			<a
 				href={`${page.url.pathname}?view=images&layout=scroll`}
