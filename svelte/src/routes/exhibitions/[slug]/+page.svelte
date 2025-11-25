@@ -314,7 +314,7 @@
 							<div class="rich-text text-sm">
 								<Portable value={exhibition_details_override} />
 							</div>
-						{:else if isCurrent}
+						{:else if isCurrent && exhibition_text}
 							<div class="rich-text text-sm">
 								{#if alternate_location}
 									<Portable value={alternate_location} />
